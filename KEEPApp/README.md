@@ -1,2 +1,4 @@
 # KEEP Application
 The main KEEP application, responsible for creating predictions from input. The KEEP application is a Django REST style api using a model trained with the **KEEP Training** application to perform text classification.
+
+* .gitignore - generated from https://www.toptal.com/developers/gitignore for Python/Django applications
