@@ -144,6 +144,7 @@ pip install jupyter==1.0.0
 jupyter notebook
 ```
 After running this command you should be redirected to a browser window automatically displaying the main jupyter homepage.
+
 16. KEEP Training is now successfully installed. For instruction on how to create and run notebooks in Jupyter refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md)
 
 ### <a id="InstallFromRepository">Installation From Repository</a>
@@ -214,6 +215,7 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 After running this command you should be redirected to a browser window automatically displaying the main jupyter homepage.
+
 11. KEEP Training is now successfully installed. For instruction on how to create and run notebooks in Jupyter refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md)
 
 ### <a id="InstallPytorch">How to Install Pytorch</a>
