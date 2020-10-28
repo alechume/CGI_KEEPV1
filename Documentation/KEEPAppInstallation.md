@@ -296,37 +296,33 @@ django-admin startapp app-name (Replace app-name with anything you'd like i.e. k
 
 9. Using your favorite text editor, open the `views.py` file and replace the contents with the following:
 ```Python
-	from django.views.decorators.http import require_POST
-	from django.views.decorators.csrf import csrf_exempt
-	from django.http import JsonResponse
-	from fastai.basic_train import load_learner
-	from torch import argmax
-	import os
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from fastai.basic_train import load_learner
+from torch import argmax
+import os
 
-	model = load_learner(os.path.dirname(os.path.abspath(__file__)),'models/KEEPModel.pkl')
+model = load_learner(os.path.dirname(os.path.abspath(__file__)),'models/KEEPModel.pkl')
 
-	#POST requests to /model/ are fed into the model and returns the reponse.
-	#
-	@require_POST
-	@csrf_exempt
-	def predict(request):
-		if request.method == 'POST':
-			pred = argmax(model.predict(request.POST.get('details'))[2])
-			return JsonResponse(int(pred), safe=False)
-
-		# if request.method == 'GET':
-		# 	pred = argmax(model.predict('This is some random text to use as an example for prediction')[2])
-		# 	return JsonResponse(int(pred), safe=False)
+#POST requests to /model/ are fed into the model and returns the reponse.
+#
+@require_POST
+@csrf_exempt
+def predict(request):
+	if request.method == 'POST':
+		pred = argmax(model.predict(request.POST.get('details'))[2])
+		return JsonResponse(int(pred), safe=False)
 ```
 10. Create a new file named `urls.py` and fill it with the following:
 ```Python
-	from django.urls import path
+from django.urls import path
 
-	from .views import predict
+from .views import predict
 
-	urlpatterns = [
-		path('', predict, name='predict'),
-	]
+urlpatterns = [
+	path('', predict, name='predict'),
+]
 ```
 11. Create a new folder named `models` and copy the `KEEPModel.pkl` file that was trained using KEEP Training into this folder
 12. Return to the `src` folder and navigate to the folder matching the project-name you set previously (Not the app-name). The folder should contain the following files:
@@ -335,28 +331,28 @@ django-admin startapp app-name (Replace app-name with anything you'd like i.e. k
 
 13. Modify the `settings.py` file `INSTALLED_APPS` section to match the following:
 ```Python
-	INSTALLED_APPS = [
-	    'django.contrib.admin',
-	    'django.contrib.auth',
-	    'django.contrib.contenttypes',
-	    'django.contrib.sessions',
-	    'django.contrib.messages',
-	    'django.contrib.staticfiles',
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 
-	    #Custom Apps
-	    'app-name', # Replace app-name with your specific app name
-	]
+    #Custom Apps
+    'app-name', # Replace app-name with your specific app name
+]
 ```
 14. Modify the `urls.py` file to match the following:
 ```Python
-	from django.contrib import admin
-	from django.urls import path
-	from django.conf.urls import include
+from django.contrib import admin
+from django.urls import path
+from django.conf.urls import include
 
-	urlpatterns = [
-	    path('admin/', admin.site.urls),
-	    path('model/', include('app-name.urls')), # Replace app-name with your specific app name
-	]
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('model/', include('app-name.urls')), # Replace app-name with your specific app name
+]
 ```
 15. Ensure all file modifications are saved
 16. With your shell, navigate to the `src` folder which contains the `manage.py` file and run the following command
