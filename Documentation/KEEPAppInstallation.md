@@ -457,7 +457,7 @@ Quit the server with CTRL-BREAK.
 	5. In the new window, click **Add**
 	6. Click **Locations** next to **From this location:**
 	7. Click the top item in the list, and click OK
-	8. In the **Enter the object names to select:** area, type **IUSR; IIS_USRS** exactly as shown
+	8. In the **Enter the object names to select:** area, type **IUSR; IIS_IUSRS** exactly as shown
 	9. Click Check Names
 
 	![Permissions](Images/KEEPAppInstallation/Permissions.jpg)
