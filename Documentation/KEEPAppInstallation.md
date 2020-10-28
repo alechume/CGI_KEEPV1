@@ -45,9 +45,14 @@ For many of the installation steps you should be familiar with using a command s
 	3. Click the dropdown for **Tools for Visual Studio 2019**
 	4. Download **Build Tools for Visual Studio 2019**
 	5. Run the build tools installer you just downloaded and follow the prompts until you reach the installation details screen
-	> NOTE: If you have already installed Visual Studio build tools in the past, you will first need to click **Modify** when you reach the **Installed** screen ![Modify Visual Studio](Images/KEEPAppInstallation/Modify.jpg)
+	> NOTE: If you have already installed Visual Studio build tools in the past, you will first need to click **Modify** when you reach the **Installed** screen
+	> 
+	> ![Modify Visual Studio](Images/KEEPAppInstallation/Modify.jpg)
+	
 	6. Check the box for **C++ build tools**, all other options can remain default.
+	
 	![Visual Studio Build Tools](Images/KEEPAppInstallation/VisualStudioBuildTools.jpg)
+	
 	7. Click install
 3. With the prerequisite installation complete, you on move on to installing KEEP App via one of the following methods:
 	* [Installation From Scratch](#InstallFromScratch)
@@ -230,7 +235,9 @@ For Pytorch installation with CUDA, you will be required to know which model of 
 2. Determine which CUDA SDK to use
 	1. Navigate to https://pytorch.org/get-started/locally/
 	2. Make note of the Pytorch supported CUDA SDK's
+	
 	![Possible CUDA Versions](Images/KEEPAppInstallation/PossibleCUDAVersions.jpg)
+	
 	3. Navigate to https://en.wikipedia.org/wiki/CUDA#GPUs_supported
 	4. Find the Pytorch supported SDK's in the list and cross-reference with the **Compute Capability** number from step 1 to determine which SDK to use, generally the higher the SDK the better
 	> NOTE: This guide was tested using CUDA SDK 10.2, with Pytorch version 1.6.0
@@ -243,7 +250,9 @@ For Pytorch installation with CUDA, you will be required to know which model of 
 		3. Package: Pip
 		4. Language: Python
 		5. CUDA: The SDK number you determined in step 2, or None
+		
 		![Pytorch Options](Images/KEEPAppInstallation/PytorchOptions.jpg)
+		
 	3. Copy the output from **Run this Command** and run the command in your shell **while the virtual environment is activated**
 	> NOTE: If you get an error during the running of this command about SSL certificates, you can modify the command to use Amazon AWS instead and try again. For example: 
 	```
@@ -278,9 +287,13 @@ cd src
 django-admin startapp app-name (Replace app-name with anything you'd like i.e. keep)
 ```
 7. Navigate to the `src` folder using the file-system. In the src folder you should see a similar structure:
+
 ![Src Folder Structure](Images/KEEPAppInstallation/SrcFolder.jpg)
+
 8. Open the folder with the name that matches whatever app-name you set previously, it should look like the following:
+
 ![App Folder Structure](Images/KEEPAppInstallation/AppFolder.jpg)
+
 9. Using your favorite text editor, open the `views.py` file and replace the contents with the following:
 ```Python
 	from django.views.decorators.http import require_POST
@@ -317,7 +330,9 @@ django-admin startapp app-name (Replace app-name with anything you'd like i.e. k
 ```
 11. Create a new folder named `models` and copy the `KEEPModel.pkl` file that was trained using KEEP Training into this folder
 12. Return to the `src` folder and navigate to the folder matching the project-name you set previously (Not the app-name). The folder should contain the following files:
+
 ![Project Folder Structure](Images/KEEPAppInstallation/ProjectFolder.jpg)
+
 13. Modify the `settings.py` file `INSTALLED_APPS` section to match the following:
 ```Python
 	INSTALLED_APPS = [
@@ -366,7 +381,9 @@ Quit the server with CTRL-BREAK.
 	2. In the Control Panel search box, type **windows features**
 	3. Under **Programs and Features** click **Turn Windows features on or off**
 	4. Check the box next to **Internet Information Services** and expland the World Wide Web Services and Application Development Features menus. Check the box next to **CGI**
+	
 	![Windows Features](Images/KEEPAppInstallation/WindowsFeatures.jpg)
+	
 	5. Navigate to http://localhost in a browser, you should see the default Windows IIS landing page
 		1. If you don't see the default page
 		2. Go back to Control Panel
@@ -379,23 +396,31 @@ Quit the server with CTRL-BREAK.
 	2. From the menu on the left, select the server
 
 	![Select the Server](Images/KEEPAppInstallation/SelectServer.jpg)
+	
 	3. With the server still selected, double-click the **FastCGI Settings** icon in the middle area
 	4. In the menu on the right, click **Add Application...**
 	5. In the **Full Path:** box enter the path to the `python.exe` file **of the virtual environment for your Django project** located in `path/to/project/root/ENVName-env/Scripts/python.exe`
 	6. In the **Arugments:** box enter the path to the `wfastcgi.py` file **of the virtual environment for your Django project** located in `path/to/project/root/ENVName-env/Lib/site-packages/wfastcgi.py`
+	
 	![FastCGI Paths](Images/KEEPAppInstallation/FastCGIPaths.jpg)
+	
 	7. In the **FastCGI Properties:** section, click on **Environment Variables** and then click the "..." on the right to open the EnvironmentVariables Collection Editor
 	8. Click **Add**
 	9. In right section, change **Name** to **WSGI_HANDLER** in all caps (This must be exact)
 	10. In the right section, set **Value** to **django.core.wsgi.get_wsgi_application()** (This must be exact)
+	
 	![WSGI HANDLER](Images/KEEPAppInstallation/WsgiHandler.jpg)
+	
 	11. Click **Add** again
 	12. In the right section, change **Name** to **DJANGO_SETTINGS_MODULE** in all caps (This must be exact)
 	13. In the right section, set **Value** to **projectname.settings**, you will need to replace **projectname** with the name of your main Django project. You can check this by looking at the first couple of lines in the `settings.py` of the Django project
 
 	![Project Name](Images/KEEPAppInstallation/ProjectName.jpg)
+	
 	14. Your environment variables should now resemble the following:
+	
 	![Django Settings Module](Images/KEEPAppInstallation/DjangoSettingsModule.jpg)
+	
 	15. Click OK to close the EvironmentVariables Collection Editor and OK again to close the Add FastCGI Application screen
 4. Add a new site to IIS
 	1. In the left menu of IIS Manager, double-click on the server name to expand it
@@ -403,7 +428,9 @@ Quit the server with CTRL-BREAK.
 	3. In the **Site name:** box enter any name you would like
 	4. Click the "..." button next to **Physical path:** and navigate to the folder that contains the `manage.py` file of your Django project
 	5. For testing purposes, change **Port:** to something other than 80, for example 85
+	
 	![Add Website](Images/KEEPAppInstallation/AddWebsite.jpg)
+	
 	6. Click OK
 5. Configure site handler mappings
 	1. In the left menu of IIS Manager, double-click on the **Sites** folder to expand it
@@ -421,6 +448,7 @@ Quit the server with CTRL-BREAK.
 	9. Your inputs should resemble the following:
 
 	![Module Mapping](Images/KEEPAppInstallation/ModuleMapping.jpg)
+	
 	10. Click **Request Restrictions** and ensure **Invoke handler only if request is mapped to:** is un-checked
 	11. Click OK to close the **Request Restrictions** screen
 	12. Click OK to close the **Edit Module Mapping** screen
@@ -437,6 +465,7 @@ Quit the server with CTRL-BREAK.
 	9. Click Check Names
 
 	![Permissions](Images/KEEPAppInstallation/Permissions.jpg)
+	
 	10. Click OK
 	11. Click OK again
 	12. **OPTIONAL** If your project resides somewhere on the file system where higher-level permissions are likely to overwrite the permissions you just configured, you can disable inheritance
@@ -450,7 +479,7 @@ Quit the server with CTRL-BREAK.
 	15. If everything is working, you can now move on to adding a custom hostname binding
 	> NOTE: KEEPApp has no static files, therefore static file configuration has been intentionally skipped
 7. Adding a hostname binding
-> NOTE: Proper DNS configuration is required to properly serve websites with custom hostname bindings. We will be faking this by manually configuring our local hosts file. This will only work if we are accessing the site from the same machine it is being hosted on, proper DNS configuration will not be covered in this guide
+	> NOTE: Proper DNS configuration is required to properly serve websites with custom hostname bindings. We will be faking this by manually configuring our local hosts file. This will only work if we are accessing the site from the same machine it is being hosted on, proper DNS configuration will not be covered in this guide
 	1. Return to IIS Manager
 	2. Expand your server and the Sites folder
 	3. Right-click on your website in the left menu
@@ -458,15 +487,21 @@ Quit the server with CTRL-BREAK.
 	5. Click on the first binding in the list and Click **Edit** on the right side
 	6. In the **Port:** box, enter 80
 	7. In the **Host name:** box, enter your custom hostname
+	
 	![Hostname Binding](Images/KEEPAppInstallation/HostnameBinding.jpg)
+	
 	8. Click OK
 	9. Click Close
 	10. With your website highlighted in the left menu of IIS Manager, Click **Restart** in the right menu
 	11. In the right menu under **Browse Website** you should now see the hostname you just configured
+	
 	![Browse Website](Images/KEEPAppInstallation/BrowseWebsite.jpg)
+	
 	12. Open the `settings.py` file of your Django project in your favorite text editor
 	13. Modify `ALLOWED_HOSTS` to include your custom hostname
+	
 	![Allowed Hosts](Images/KEEPAppInstallation/AllowedHosts.jpg)
+	
 	14. If your DNS is already configured, you're done. Otherwise, we will modify our local hosts file, this should only ever be used for testing purposes
 		1. From the windows start menu, search for **Notepad**
 		2. Right-click **Notepad** and select **Run as Administrator**
@@ -475,7 +510,9 @@ Quit the server with CTRL-BREAK.
 		5. Navigate to your local hosts file, usually located at `C:\Windows\System32\drivers\etc`
 		6. Open the file named **hosts**
 		7. Scroll to the bottom of the file and add a new entry for your custom hostname
+		
 		![Hosts](Images/KEEPAppInstallation/Hosts.jpg)
+		
 		8. Save the hosts file
 	15. You should now be able to access your Django project from your custom hostname
 	16. You can now move on to [Connecting KEEPApp to Jira](#ConnectKEEPAppJira)
