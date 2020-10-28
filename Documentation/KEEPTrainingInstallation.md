@@ -44,9 +44,14 @@ For many of the installation steps you should be familiar with using a command s
 	3. Click the dropdown for **Tools for Visual Studio 2019**
 	4. Download **Build Tools for Visual Studio 2019**
 	5. Run the build tools installer you just downloaded and follow the prompts until you reach the installation details screen
-	> NOTE: If you have already installed Visual Studio build tools in the past, you will first need to click **Modify** when you reach the **Installed** screen ![Modify Visual Studio](Images/KEEPTrainingInstallation/Modify.jpg)
+	> NOTE: If you have already installed Visual Studio build tools in the past, you will first need to click **Modify** when you reach the **Installed** screen 
+	> 
+	> ![Modify Visual Studio](Images/KEEPTrainingInstallation/Modify.jpg)
+	
 	6. Check the box for **C++ build tools**, all other options can remain default.
+	
 	![Visual Studio Build Tools](Images/KEEPTrainingInstallation/VisualStudioBuildTools.jpg)
+	
 	7. Click install
 3. With the prerequisite installation complete, you on move on to installing KEEP Training via one of the following methods:
 	* [Installation From Scratch](#InstallFromScratch)
@@ -221,7 +226,9 @@ For Pytorch installation with CUDA, you will be required to know which model of 
 2. Determine which CUDA SDK to use
 	1. Navigate to https://pytorch.org/get-started/locally/
 	2. Make note of the Pytorch supported CUDA SDK's
+	
 	![Possible CUDA Versions](Images/KEEPTrainingInstallation/PossibleCUDAVersions.jpg)
+	
 	3. Navigate to https://en.wikipedia.org/wiki/CUDA#GPUs_supported
 	4. Find the Pytorch supported SDK's in the list and cross-reference with the **Compute Capability** number from step 1 to determine which SDK to use, generally the higher the SDK the better
 	> NOTE: This guide was tested using CUDA SDK 10.2, with Pytorch version 1.6.0
@@ -234,7 +241,9 @@ For Pytorch installation with CUDA, you will be required to know which model of 
 		3. Package: Pip
 		4. Language: Python
 		5. CUDA: The SDK number you determined in step 2, or None
+		
 		![Pytorch Options](Images/KEEPTrainingInstallation/PytorchOptions.jpg)
+		
 	3. Copy the output from **Run this Command** and run the command in your shell **while the virtual environment is activated**
 	> NOTE: If you get an error during the running of this command about SSL certificates, you can modify the command to use Amazon AWS instead and try again. For example: 
 	```
