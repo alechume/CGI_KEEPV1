@@ -8,7 +8,7 @@
 6. [Installation From Repository](#InstallFromRepository)
 7. [How to Install Pytorch](#InstallPytorch)
 8. [Creating the Django Application](#CreateDjangoApp)
-9. [Hosting Django on IIS](#HostingDjangoIIS)
+9. [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
 10. [Connecting KEEPApp to Jira](#ConnectKEEPAppJira)
 
 ### <a id="Introduction">Introduction</a>
@@ -215,6 +215,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 When the django development server has successfully started you should see output similar to the following:
+> Note: By default the Django development server runs on port 8000. If you need to use a different port, you can specify a URL and port combination for Django to use by modifying the runserver command. Example: `python manage.py runserver 127.0.0.1:85`
 ```
 System check identified no issues (0 silenced).
 October 27, 2020 - 15:24:04
@@ -223,7 +224,7 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 ```
 16. Navigate to `http://127.0.0.1:8000/model/` in your browser, you should be presented with a `405 error`. This indicates that you have successfully reached the django view, but since the view only accepts POST requests there is nothing to actually display.
-17. With the Django server successfully installed and configured, you are now ready to move on to [Hosting Django on IIS](#HostingDjangoIIS)
+17. With the Django server successfully installed and configured, you are now ready to move on to [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
 
 ### <a id="InstallPytorch">How to Install Pytorch</a>
 For Pytorch installation with CUDA, you will be required to know which model of GPU the machine or server running KEEP has. If you are unsure, or do not have a CUDA capable GPU you may skip to step 3.
@@ -360,6 +361,7 @@ urlpatterns = [
 python manage.py runserver
 ```
 When the django development server has successfully started you should see output similar to the following:
+> Note: By default the Django development server runs on port 8000. If you need to use a different port, you can specify a URL and port combination for Django to use by modifying the runserver command. Example: `python manage.py runserver 127.0.0.1:85`
 ```
 System check identified no issues (0 silenced).
 October 27, 2020 - 15:24:04
@@ -368,9 +370,9 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 ```
 17. Navigate to `http://127.0.0.1:8000/model/` you should be presented with a `405 error`. This indicates that you have successfully reached the django view, but since the view only accepts POST requests there is nothing to actually display.
-18. With the Django server successfully installed and configured, you are now ready to move on to [Hosting Django on IIS](#HostingDjangoIIS)
+18. With the Django server successfully installed and configured, you are now ready to move on to [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
 
-### <a id="HostingDjangoIIS">Hosting Django on IIS</a>
+### <a id="HostingKEEPAppIIS">Hosting KEEP App on IIS</a>
 1. Begin with either [Installation From Scratch](#InstallFromScratch) or [Installation From Repository](#InstallFromRepository). If you installed from scratch ensure you also installed the optional `wfastcgi` package
 2. Install Windows IIS (Internet Information Services)
 	1. Open Control Panel
@@ -447,7 +449,7 @@ Quit the server with CTRL-BREAK.
 	
 	10. Click **Request Restrictions** and ensure **Invoke handler only if request is mapped to:** is un-checked
 	11. Click OK to close the **Request Restrictions** screen
-	12. Click OK to close the **Edit Module Mapping** screen
+	12. Click OK to close the **Add Module Mapping** screen
 	13. Click No to the **Do you want to create a FastCGI application for this executable?** warning
 6. Configure folder permissions for IIS
 	1. Navigate to the root folder of the project (The folder that contains the src folder)
@@ -471,7 +473,7 @@ Quit the server with CTRL-BREAK.
 		4. Click OK
 	13. Click OK to close the properties screen
 	> NOTE: We have only added Read and Execute permissions. For certain projects, it may be necessary to add Write and Modify permissions to IUSR and IIS_USRS as well
-	14. You should now be able to access your Django application through http://localhost:85 (replace 85 with whatever port you configured previously)
+	14. You should now be able to access your Django application through http://localhost:85/model/ (replace 85 with whatever port you configured previously)
 	15. If everything is working, you can now move on to adding a custom hostname binding
 	> NOTE: KEEPApp has no static files, therefore static file configuration has been intentionally skipped
 7. Adding a hostname binding
@@ -488,7 +490,7 @@ Quit the server with CTRL-BREAK.
 	
 	8. Click OK
 	9. Click Close
-	10. With your website highlighted in the left menu of IIS Manager, Click **Restart** in the right menu
+	10. Click your website in the left menu of IIS Manager and then Click **Restart** in the right menu
 	11. In the right menu under **Browse Website** you should now see the hostname you just configured
 	
 	![Browse Website](Images/KEEPAppInstallation/BrowseWebsite.jpg)
@@ -510,7 +512,7 @@ Quit the server with CTRL-BREAK.
 		![Hosts](Images/KEEPAppInstallation/Hosts.jpg)
 		
 		8. Save the hosts file
-	15. You should now be able to access your Django project from your custom hostname
+	15. You should now be able to access your Django project from your custom hostname. Example: `alec.keepapi.com/model/`
 	16. You can now move on to [Connecting KEEPApp to Jira](#ConnectKEEPAppJira)
 
 ### <a id="ConnectKEEPAppJira">Connecting KEEPApp to Jira</a>
