@@ -199,18 +199,13 @@ Once verified we can exit our Python shell
 pip install -r requirements.txt
 ```
 10. The KEEP App package requirements are now successfully installed. We can now move on to testing base operation of the Django project
-11. Navigate to the `src` folder in your shell, located in the root of the `KEEPApp` project
+11. Using the file-system (not the shell) navigate to the `keep` folder inside the `src` folder
+12. Create a new folder named `models` inside the `keep` folder, and copy the `KEEPModel.pkl` file that was trained using KEEP Training into the `models` folder you created
+13. Navigate to the `src` folder in your shell, located in the root of the `KEEPApp` project folder
 ```
 cd src
 ```
-12. Run the following commands from the `src` folder (the same folder where manage.py is located)
-```
-python manage.py makemigrations
-python manage.py migrate
-```
-13. Using the file-system (not the shell) navigate to the `keep` folder inside the `src` folder
-14. Create a new folder named `models` and copy the `KEEPModel.pkl` file that was trained using KEEP Training into this folder
-15. From your shell, which should still be running from the `src` (folder which contains `manage.py`), run the following command to start the development server
+14. From your shell, run the following command to start the development server
 ```
 python manage.py runserver
 ```
@@ -223,8 +218,8 @@ Django version 2.1.10, using settings 'keepapi.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 ```
-16. Navigate to `http://127.0.0.1:8000/model/` in your browser, you should be presented with a `405 error`. This indicates that you have successfully reached the django view, but since the view only accepts POST requests there is nothing to actually display.
-17. With the Django server successfully installed and configured, you are now ready to move on to [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
+15. Navigate to `http://127.0.0.1:8000/model/` in your browser, you should be presented with a `405 error`. This indicates that you have successfully reached the django view, but since the view only accepts POST requests there is nothing to actually display.
+16. With the Django server successfully installed and configured, you are now ready to move on to [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
 
 ### <a id="InstallPytorch">How to Install Pytorch</a>
 For Pytorch installation with CUDA, you will be required to know which model of GPU the machine or server running KEEP has. If you are unsure, or do not have a CUDA capable GPU you may skip to step 3.
