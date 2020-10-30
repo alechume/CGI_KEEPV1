@@ -44,7 +44,7 @@ For many of the installation steps you should be familiar with using a command s
 	3. Click the dropdown for **Tools for Visual Studio 2019**
 	4. Download **Build Tools for Visual Studio 2019**
 	5. Run the build tools installer you just downloaded and follow the prompts until you reach the installation details screen
-	> NOTE: If you have already installed Visual Studio build tools in the past, you will first need to click **Modify** when you reach the **Installed** screen 
+	> Note: If you have already installed Visual Studio build tools in the past, you will first need to click **Modify** when you reach the **Installed** screen 
 	> 
 	> ![Modify Visual Studio](Images/KEEPTrainingInstallation/Modify.jpg)
 	
@@ -139,13 +139,18 @@ pip install xlrd==1.2.0
 ```
 pip install jupyter==1.0.0
 ```
-15. Start jupyter server to verify installation
+15. With the installation of the packages now complete, we can set a password for Jupyter to use using the following command
+> Note: Jupyter will display where it has stored your hashed password. Make a mental note of this location, as it is the same location where Jupyter configuration files will be stored by default.
+```
+jupyter notebook password
+```
+16. Start jupyter server and log in with the password you created to verify installation
 ```
 jupyter notebook
 ```
 After running this command you should be redirected to a browser window automatically displaying the main jupyter homepage.
 
-16. KEEP Training is now successfully installed. For instruction on how to create and run notebooks in Jupyter refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md)
+17. KEEP Training is now successfully installed. For instruction on how to create and run notebooks in Jupyter refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md)
 
 ### <a id="InstallFromRepository">Installation From Repository</a>
 1. Begin with the [Prerequisite Installation](#PrerequisiteInstallation)
@@ -210,13 +215,18 @@ Once verified we can exit our Python shell
 ```
 pip install -r requirements.txt
 ```
-10. Start jupyter server to verify installation
+10. With the installation of the packages now complete, we can set a password for Jupyter to use using the following command
+> Note: Jupyter will display where it has stored your hashed password. Make a mental note of this location, as it is the same location where Jupyter configuration files will be stored by default.
+```
+jupyter notebook password
+```
+11. Start jupyter server and log in with the password you created to verify installation
 ```
 jupyter notebook
 ```
 After running this command you should be redirected to a browser window automatically displaying the main jupyter homepage.
 
-11. KEEP Training is now successfully installed. For instruction on how to create and run notebooks in Jupyter refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md)
+12. KEEP Training is now successfully installed. For instruction on how to create and run notebooks in Jupyter refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md)
 
 ### <a id="InstallPytorch">How to Install Pytorch</a>
 For Pytorch installation with CUDA, you will be required to know which model of GPU the machine or server running KEEP has. If you are unsure, or do not have a CUDA capable GPU you may skip to step 3.
@@ -233,7 +243,7 @@ For Pytorch installation with CUDA, you will be required to know which model of 
 	
 	3. Navigate to https://en.wikipedia.org/wiki/CUDA#GPUs_supported
 	4. Find the Pytorch supported SDK's in the list and cross-reference with the **Compute Capability** number from step 1 to determine which SDK to use, generally the higher the SDK the better
-	> NOTE: This guide was tested using CUDA SDK 10.2, with Pytorch version 1.6.0
+	> Note: This guide was tested using CUDA SDK 10.2, with Pytorch version 1.6.0
 	5. Navigate to https://developer.nvidia.com/cuda-toolkit-archive and download and install the CUDA Toolkit with the matching number of the SDK you just determined, for example, if you determined you need to use CUDA SDK 10.2, download CUDA Toolkit 10.2. When downloading choose **exe (local)**.
 3. Install Pytorch
 	1. Navigate to https://pytorch.org/get-started/locally/
@@ -247,7 +257,7 @@ For Pytorch installation with CUDA, you will be required to know which model of 
 		![Pytorch Options](Images/KEEPTrainingInstallation/PytorchOptions.jpg)
 		
 	3. Copy the output from **Run this Command** and run the command in your shell **while the virtual environment is activated**
-	> NOTE: If you get an error during the running of this command about SSL certificates, you can modify the command to use Amazon AWS instead and try again. For example: 
+	> Note: If you get an error during the running of this command about SSL certificates, you can modify the command to use Amazon AWS instead and try again. For example: 
 	```
 	pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 	```
