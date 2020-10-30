@@ -35,17 +35,17 @@ Jupyter is a software package that allows developers to both write code and see 
 ![Rename](Images/KEEPTrainingOperationManual/Rename.jpg)
 
 ### <a id="UseExistingNotebook">Using an Existing Notebook</a>
-> NOTE: You will need to have a Notebook `.ipynb` file, and know where it is stored
+> Note: You will need to have a Notebook `.ipynb` file, and know where it is stored
 1. From the Jupyter browser window, navigate to the location of the notebook `.ipynb` file you want to run and click on it
 2. If you would like to re-run the notebook, click the button with the double arrows and click <kbd>Restart and Run All Cells</kbd>
 
 ![Rerun Notebook](Images/KEEPTrainingOperationManual/RerunNotebook.jpg)
 
 3. To run individual `cells`, highlight the `cell` by clicking on it and press <kbd>Shift</kbd> + <kbd>Enter</kbd> or press the <kbd>Run</kbd> button at the top of the page
-> NOTE: When you run a notebook, Jupyter will automatically save the output, therefore just because you see output from previous cells, you may not have access to their variables until you re-run the preceding cells. For example, if in cell 1 I have `x = 10` and in cell 2 I have `print(x)`, cell 2 will fail until I run cell 1 first.
+> Note: When you run a notebook, Jupyter will automatically save the output, therefore just because you see output from previous cells, you may not have access to their variables until you re-run the preceding cells. For example, if in cell 1 I have `x = 10` and in cell 2 I have `print(x)`, cell 2 will fail until I run cell 1 first.
 
 ### <a id="RetrainKEEPModel">Re-training the KEEP Neural Network Model</a>
-> NOTE: Access to the Jira database will be required.
+> Note: Access to the Jira database will be required.
 1. Read through [Creating Your First Notebook](#CreateFirstNotebook) and [Using an Existing Notebook](#UseExistingNotebook)
 2. You will need to obtain a copy of the **KEEPNeuralNetworkTraining** notebook and its supporting files. You can obtain this file from the [Repository](https://github.com/alechume/CGI_KEEPV1) in the [KEEPNeuralNetworkTraining](https://github.com/alechume/CGI_KEEPV1/tree/main/KEEPTraining/Notebooks/KEEPNeuralNetworkTraining) folder (../KEEPTraining/Notebooks/KEEPNeuralNetworkTraining).
 3. Place these files somewhere accessible to the Jupyter server. For example, within a notebooks folder in the root project directory
@@ -64,13 +64,13 @@ Jupyter is a software package that allows developers to both write code and see 
 
 ![Rerun Notebook](Images/KEEPTrainingOperationManual/RerunNotebook.jpg)
 
-> NOTE: Training neural network models can take a significant amount of time and system resources. It is recommended that you do NOT attempt to train models on business-critical systems or servers.
+> Note: Training neural network models can take a significant amount of time and system resources. It is recommended that you do NOT attempt to train models on business-critical systems or servers.
 7. You can monitor the progress of your notebook in real-time. For each `cell` containing code, Jupyter will display an `*` or a number indicating if it is processing or completed. For example, in the image below we can see that the `cell` containing `learn.unfreeze()` has completed, indicated by the number 11, and that the next `cell` with `learn.fit_one_cycle(...)` is currently being processed.
 
 ![Notebook Running](Images/KEEPTrainingOperationManual/NotebookRunning.jpg)
 
 8. When the notebook has finished running, you can find the trained models in the output folder/directory `models`, located in the same directory as the notebook `.ipynb` file. For a more detailed explanation of what each model is used for and how they were trained, read the explanation within the notebook itself.
-> NOTE: The main model responsible for performing predictions is the `KEEPModel.pkl` model.
+> Note: The main model responsible for performing predictions is the `KEEPModel.pkl` model.
 
 ![Model Output Directory](Images/KEEPTrainingOperationManual/ModelOutputDirectory.jpg)
 

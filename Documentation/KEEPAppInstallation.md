@@ -45,7 +45,7 @@ For many of the installation steps you should be familiar with using a command s
 	3. Click the dropdown for **Tools for Visual Studio 2019**
 	4. Download **Build Tools for Visual Studio 2019**
 	5. Run the build tools installer you just downloaded and follow the prompts until you reach the installation details screen
-	> NOTE: If you have already installed Visual Studio build tools in the past, you will first need to click **Modify** when you reach the **Installed** screen
+	> Note: If you have already installed Visual Studio build tools in the past, you will first need to click **Modify** when you reach the **Installed** screen
 	> 
 	> ![Modify Visual Studio](Images/KEEPAppInstallation/Modify.jpg)
 	
@@ -194,7 +194,7 @@ Once verified we can exit our Python shell
 >>> exit()
 ```
 9. Install the remaining packages using the included `requirements.txt` file
-> NOTE: You will need to navigate to the same directory as the requirements file, or specify the exact location. The requirements file is located in the `KEEPApp` folder of the repository
+> Note: You will need to navigate to the same directory as the requirements file, or specify the exact location. The requirements file is located in the `KEEPApp` folder of the repository
 ```
 pip install -r requirements.txt
 ```
@@ -236,7 +236,7 @@ For Pytorch installation with CUDA, you will be required to know which model of 
 	
 	3. Navigate to https://en.wikipedia.org/wiki/CUDA#GPUs_supported
 	4. Find the Pytorch supported SDK's in the list and cross-reference with the **Compute Capability** number from step 1 to determine which SDK to use, generally the higher the SDK the better
-	> NOTE: This guide was tested using CUDA SDK 10.2, with Pytorch version 1.6.0
+	> Note: This guide was tested using CUDA SDK 10.2, with Pytorch version 1.6.0
 	5. Navigate to https://developer.nvidia.com/cuda-toolkit-archive and download and install the CUDA Toolkit with the matching number of the SDK you just determined, for example, if you determined you need to use CUDA SDK 10.2, download CUDA Toolkit 10.2. When downloading choose **exe (local)**.
 3. Install Pytorch
 	1. Navigate to https://pytorch.org/get-started/locally/
@@ -250,7 +250,7 @@ For Pytorch installation with CUDA, you will be required to know which model of 
 		![Pytorch Options](Images/KEEPAppInstallation/PytorchOptions.jpg)
 		
 	3. Copy the output from **Run this Command** and run the command in your shell **while the virtual environment is activated**
-	> NOTE: If you get an error during the running of this command about SSL certificates, you can modify the command to use Amazon AWS instead and try again. For example: 
+	> Note: If you get an error during the running of this command about SSL certificates, you can modify the command to use Amazon AWS instead and try again. For example: 
 	```
 	pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 	```
@@ -270,7 +270,7 @@ cd path/to/folder
 .\ENVName-env\Scripts\activate (Replace ENVName-env with the name of the KEEP App virtual environment)
 ```
 4. Create the main Django application inside the `src` folder by using the following command
-> NOTE: This command will create a manage.py file and a subfolder with the same name as your project-name within the src folder. Take note of the location of the manage.py file, as this will be used for a number of commands later.
+> Note: This command will create a manage.py file and a subfolder with the same name as your project-name within the src folder. Take note of the location of the manage.py file, as this will be used for a number of commands later.
 ```
 django-admin startproject project-name src (Replace project-name with whatever you'd like)
 ```
@@ -433,7 +433,7 @@ Quit the server with CTRL-BREAK.
 	5. In **Request path:** enter `*`
 	6. In **Module:** select **FastCgiModule** (not CgiModule)
 	7. In **Executeable:** enter the path to the `python.exe` of your virtual environment, followed by a pipe ("|") symbol, immediately followed by the path to the `wfastcgi.py` file of your virtual environment. For example:
-	> NOTE: Having spaces in any part of your path is not supported
+	> Note: Having spaces in any part of your path is not supported
 	```
 	C:\path\to\ENVName-env\Scripts\python.exe|C:\path\to\ENVName-env\Lib\site-packages\wfastcgi.py
 	```
@@ -467,12 +467,12 @@ Quit the server with CTRL-BREAK.
 		3. Click **Convert inherited permissions into explicit permissions on this object**
 		4. Click OK
 	13. Click OK to close the properties screen
-	> NOTE: We have only added Read and Execute permissions. For certain projects, it may be necessary to add Write and Modify permissions to IUSR and IIS_USRS as well
+	> Note: We have only added Read and Execute permissions. For certain projects, it may be necessary to add Write and Modify permissions to IUSR and IIS_USRS as well
 	14. You should now be able to access your Django application through http://localhost:85/model/ (replace 85 with whatever port you configured previously)
 	15. If everything is working, you can now move on to adding a custom hostname binding
-	> NOTE: KEEPApp has no static files, therefore static file configuration has been intentionally skipped
+	> Note: KEEPApp has no static files, therefore static file configuration has been intentionally skipped
 7. Adding a hostname binding
-	> NOTE: Proper DNS configuration is required to properly serve websites with custom hostname bindings. We will be faking this by manually configuring our local hosts file. This will only work if we are accessing the site from the same machine it is being hosted on, proper DNS configuration will not be covered in this guide
+	> Note: Proper DNS configuration is required to properly serve websites with custom hostname bindings. We will be faking this by manually configuring our local hosts file. This will only work if we are accessing the site from the same machine it is being hosted on, proper DNS configuration will not be covered in this guide
 	1. Return to IIS Manager
 	2. Expand your server and the Sites folder
 	3. Right-click on your website in the left menu
