@@ -23,3 +23,9 @@
 	![Visual Studio Build Tools](Images/PrerequisiteInstallation/VisualStudioBuildTools.jpg)
 	
 	7. Click install
+3. Install `virtualenv` using Python Pip
+	1. Open a command shell (cmd prompt, PowerShell, bash or equivalent)
+	2. Run the following command
+	```
+	pip install virtualenv
+	```
