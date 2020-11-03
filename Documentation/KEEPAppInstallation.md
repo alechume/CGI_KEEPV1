@@ -5,11 +5,9 @@
 3. [Package Versions](#PackageVersions)
 4. [Prerequisite Installation](#PrerequisiteInstallation)
 5. [Installation From Scratch](#InstallFromScratch)
-6. [Installation From Repository](#InstallFromRepository)
-7. [How to Install Pytorch](#InstallPytorch)
-8. [Creating the Django Application](#CreateDjangoApp)
-9. [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
-10. [Connecting KEEPApp to Jira](#ConnectKEEPAppJira)
+7. [Creating the Django Application](#CreateDjangoApp)
+8. [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
+9. [Connecting KEEPApp to Jira](#ConnectKEEPAppJira)
 
 ### <a id="Introduction">Introduction</a>
 Below you will find the instructions on the installation of the Django backend application responsible for using the model trained with KEEP Training. The installation of KEEP Training is NOT required, but a trained text classification model IS required. For the purpose of this tutorial all software and package prerequisites will be listed, and it will be assumed you are using the same versions. You may attempt installation using differing versions, but results may vary.
@@ -27,7 +25,7 @@ For many of the installation steps you should be familiar with using a command s
 3. [Fastai](https://fastai1.fast.ai/install.html) = 1.0.61 (Simplified API for Pytorch)
 4. [SpaCy](https://spacy.io/) = 2.3.2 (Natural language processing software library)
 5. [Django](https://www.djangoproject.com/) = 2.1.10 (Django web framework used for handling prediction requests and returning results)
-6. **OPTIONAL** [Wfastcgi](https://pypi.org/project/wfastcgi/) = 3.0.0 (Allows python applications to be hosted via Windows IIS)
+6. [Wfastcgi](https://pypi.org/project/wfastcgi/) = 3.0.0 (Allows python applications to be hosted via Windows IIS)
 
 ### <a id="PrerequisiteInstallation">Prerequisite Installation</a>
 1. Download and install `Python` (version 3.8.5), be sure to check your system information to determine if you need 64bit vs 32bit
@@ -88,7 +86,7 @@ The output in the shell window should now be prefaced with the environment name 
 python -m pip install --upgrade pip
 ```
 7. Now we are ready to begin installing our required packages. First we'll install Pytorch
-> In general it is best to install the same version of Pytorch that was used to train the model. If you are unsure which version was used, you will either need to find out, or attempt to install the correct version through trial and error. Please refer to the [How to Install Pytorch](#InstallPytorch) section of this installation guide for details
+> In general it is best to install the same version of Pytorch that was used to train the model. If you are unsure which version was used, you will either need to find out, or attempt to install the correct version through trial and error. Please refer to the [Pytorch Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PytorchInstallation.md) guide for details.
 8. Verify Pytorch installation by first entering a Python shell using the following command
 ```
 python
@@ -128,136 +126,12 @@ pip install spacy==2.3.2
 ```
 pip install django==2.1.10
 ```
-12. **OPTIONAL** If you intend to host the KEEP App using **Windows IIS** you will need to install wfastcgi 3.0.0
+12. Install wfastcgi 3.0.0 **(with your python virtual environment activated)**
 ```
 pip install wfastcgi==3.0.0
 ```
 13. The KEEP App package requirements are now successfully installed, you can now move on to creating the Django application backend for KEEP App.
 > Please refer to the [Creating the Django Application](#CreateDjangoApp) section of this installation guide for details.
-
-### <a id="InstallFromRepository">Installation From Repository</a>
-1. Begin with the [Prerequisite Installation](#PrerequisiteInstallation)
-2. Clone the repository to your local environment and navigate to the `KEEPApp` folder via your shell
-> Note: Ensure your shell is running in administrator mode or equivalent
-```
-cd path/to/folder/KEEPApp/
-```
-3. Install `virtualenv` using pip
-```
-pip install virtualenv
-```
-4. Create a `virtual python environment` to contain Python dependancies using the following command
-> Note: A `virtual python environment` allows us to keep all our installed packages and dependancies local to the project we're working on, effectively allowing us to install different versions of packages for different projects without interference.
-```
-virtualenv ENVName-env (Replace ENVName-env with anything you'd like)
-```
-5. Activate the virtual environment you just created in order to start installing required packages
-> Note: You will need to activate this virtual environment every time you want to work with this project from the cmd line or shell, you can deactive the environment when finished with the `deactivate` command.
-```
-.\ENVName-env\Scripts\activate
-```
-The output in the shell window should now be prefaced with the environment name in brackets:
-```
-(ENVName-env) C:\Some\path>
-```
-6. Before we begin installing the required packages we need to upgrade the pip installer with the following command
-```
-python -m pip install --upgrade pip
-```
-7. Now we are ready to begin installing our required packages. First we'll install Pytorch
-> In general it is best to install the same version of Pytorch that was used to train the model. If you are unsure which version was used, you will either need to find out, or attempt to install the correct version through trial and error. Please refer to the [How to Install Pytorch](#InstallPytorch) section of this installation guide for details
-8. Verify Pytorch installation by first entering a Python shell using the following command
-```
-python
-```
-and run the following commands
-```
->>> from __future__ import print_function
->>> import torch
->>> x = torch.rand(5, 3)
->>> print(x)
-```
-The output should look similar to the follow:
-```
-tensor([[0.3380, 0.3845, 0.3217],
-        [0.8337, 0.9050, 0.2650],
-        [0.2979, 0.7141, 0.9069],
-        [0.1449, 0.1132, 0.1375],
-        [0.4675, 0.3947, 0.1426]])
-```
-Additionally, if you installed Pytorch with CUDA, you can check if your GPU driver and CUDA are installed and accessible using the following command, which should return `True`. **If you chose not to install Pytorch with CUDA, skip this step.**
-```
-torch.cuda.is_available()
-```
-Once verified we can exit our Python shell
-```
->>> exit()
-```
-9. Install the remaining packages using the included `requirements.txt` file
-> Note: You will need to navigate to the same directory as the requirements file, or specify the exact location. The requirements file is located in the `KEEPApp` folder of the repository
-```
-pip install -r requirements.txt
-```
-10. The KEEP App package requirements are now successfully installed. We can now move on to testing base operation of the Django project
-11. Using the file-system (not the shell) navigate to the `keep` folder inside the `src` folder
-12. Create a new folder named `models` inside the `keep` folder, and copy the `KEEPModel.pkl` file that was trained using KEEP Training into the `models` folder you created
-13. Navigate to the `src` folder in your shell, located in the root of the `KEEPApp` project folder
-```
-cd src
-```
-14. From your shell, run the following command to start the development server
-```
-python manage.py runserver
-```
-When the django development server has successfully started you should see output similar to the following:
-> Note: By default the Django development server runs on port 8000. If you need to use a different port, you can specify a URL and port combination for Django to use by modifying the runserver command. Example: `python manage.py runserver 127.0.0.1:85`
-```
-System check identified no issues (0 silenced).
-October 27, 2020 - 15:24:04
-Django version 2.1.10, using settings 'keepapi.settings'
-Starting development server at http://127.0.0.1:8000/
-Quit the server with CTRL-BREAK.
-```
-15. Navigate to `http://127.0.0.1:8000/model/` in your browser, you should be presented with a `405 error`. This indicates that you have successfully reached the django view, but since the view only accepts POST requests there is nothing to actually display.
-16. With the Django server successfully installed and configured, you are now ready to move on to [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
-
-### <a id="InstallPytorch">How to Install Pytorch</a>
-For Pytorch installation with CUDA, you will be required to know which model of GPU the machine or server running KEEP has. If you are unsure, or do not have a CUDA capable GPU you may skip to step 3.
-1. Determine if you have a CUDA capable GPU
-	1. Navigate to https://developer.nvidia.com/cuda-gpus
-	2. Scroll down and check the expandable tables for your specific GPU model
-	3. Make note of the **Compute Capability** number next to your GPU model
-	4. If you determine you do not have a CUDA capable GPU, skip to step 3
-2. Determine which CUDA SDK to use
-	1. Navigate to https://pytorch.org/get-started/locally/
-	2. Make note of the Pytorch supported CUDA SDK's
-	
-	![Possible CUDA Versions](Images/KEEPAppInstallation/PossibleCUDAVersions.jpg)
-	
-	3. Navigate to https://en.wikipedia.org/wiki/CUDA#GPUs_supported
-	4. Find the Pytorch supported SDK's in the list and cross-reference with the **Compute Capability** number from step 1 to determine which SDK to use, generally the higher the SDK the better
-	> Note: This guide was tested using CUDA SDK 10.2, with Pytorch version 1.6.0
-	5. Navigate to https://developer.nvidia.com/cuda-toolkit-archive and download and install the CUDA Toolkit with the matching number of the SDK you just determined, for example, if you determined you need to use CUDA SDK 10.2, download CUDA Toolkit 10.2. When downloading choose **exe (local)**.
-3. Install Pytorch
-	1. Navigate to https://pytorch.org/get-started/locally/
-	2. Select the following options:
-		1. Pytorch Build: Stable
-		2. Your OS: What operating system KEEP will be running on
-		3. Package: Pip
-		4. Language: Python
-		5. CUDA: The SDK number you determined in step 2, or None
-		
-		![Pytorch Options](Images/KEEPAppInstallation/PytorchOptions.jpg)
-		
-	3. Copy the output from **Run this Command** and run the command in your shell **while the virtual environment is activated**
-	> Note: If you get an error during the running of this command about SSL certificates, you can modify the command to use Amazon AWS instead and try again. For example: 
-	```
-	pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
-	```
-	> would become: 
-	```
-	pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://s3.amazonaws.com/pytorch/whl/torch_stable.html
-	```
 
 ### <a id="CreateDjangoApp">Creating the Django Application</a>
 1. From the root directory of the KEEP App project, create a new folder called `src` to keep the Django application files contained
@@ -368,7 +242,7 @@ Quit the server with CTRL-BREAK.
 18. With the Django server successfully installed and configured, you are now ready to move on to [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
 
 ### <a id="HostingKEEPAppIIS">Hosting KEEP App on IIS</a>
-1. Begin with either [Installation From Scratch](#InstallFromScratch) or [Installation From Repository](#InstallFromRepository). If you installed from scratch ensure you also installed the optional `wfastcgi` package
+1. Begin with [Installation From Scratch](#InstallFromScratch)
 2. Install Windows IIS (Internet Information Services)
 	1. Open Control Panel
 	2. In the Control Panel search box, type **windows features**

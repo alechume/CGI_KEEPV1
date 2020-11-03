@@ -5,8 +5,6 @@
 3. [Package Versions](#PackageVersions)
 4. [Prerequisite Installation](#PrerequisiteInstallation)
 5. [Installation From Scratch](#InstallFromScratch)
-6. [Installation From Repository](#InstallFromRepository)
-7. [How to Install Pytorch](#InstallPytorch)
 
 ### <a id="Introduction">Introduction</a>
 Below you will find the instructions on the installation of the Jupyter Notebook application responsible for training the neural network model used within KEEP. For the purpose of this tutorial all software and package prerequisites will be listed, and it will be assumed you are using the same versions. You may attempt installation using differing versions, but results may vary.
@@ -87,7 +85,7 @@ The output in the shell windows should now be prefaced with the environment name
 python -m pip install --upgrade pip
 ```
 7. Now we are ready to begin installing our required packages. First we'll install Pytorch
-> Please refer to the [How to Install Pytorch](#InstallPytorch) section of this installation guide for details
+> Please refer to the [Pytorch Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PytorchInstallation.md) guide for details.
 8. Verify Pytorch installation by first entering a Python shell using the following command
 ```
 python
@@ -151,117 +149,3 @@ jupyter notebook
 After running this command you should be redirected to a browser window automatically displaying the main jupyter homepage.
 
 17. KEEP Training is now successfully installed. For instruction on how to create and run notebooks in Jupyter refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md)
-
-### <a id="InstallFromRepository">Installation From Repository</a>
-1. Begin with the [Prerequisite Installation](#PrerequisiteInstallation)
-2. Clone the repository to your local environment and navigate to the `KEEPTraining` folder via your shell
-> Note: Ensure your shell is running in administrator mode or equivalent
-```
-cd path/to/folder/KEEPTraining/
-```
-3. Install `virtualenv` using pip
-```
-pip install virtualenv
-```
-4. Create a `virtual python environment` to contain Python dependancies using the following command
-> Note: A `virtual python environment` allows us to keep all our installed packages and dependancies local to the project we're working on, effectively allowing us to install different versions of packages for different projects without interference.
-```
-virtualenv ENVName-env (Replace ENVName-env with anything you'd like)
-```
-5. Activate the virtual environment you just created in order to start installing required packages
-> Note: You will need to activate this virtual environment every time you want to work with this project from the cmd line or shell, you can deactive the environment when finished with the `deactivate` command.
-```
-.\ENVName-env\Scripts\activate
-```
-The output in the shell windows should now be prefaced with the environment name in brackets:
-```
-(ENVName-env) C:\Some\path>
-```
-6. Before we begin installing the required packages we need to upgrade the pip installer with the following command
-```
-python -m pip install --upgrade pip
-```
-7. Now we are ready to begin installing our required packages. First we'll install Pytorch
-> Please refer to the [How to Install Pytorch](#InstallPytorch) section of this installation guide for details
-8. Verify Pytorch installation by first entering a Python shell using the following command
-```
-python
-```
-and run the following commands
-```
->>> from __future__ import print_function
->>> import torch
->>> x = torch.rand(5, 3)
->>> print(x)
-```
-The output should look similar to the follow:
-```
-tensor([[0.3380, 0.3845, 0.3217],
-        [0.8337, 0.9050, 0.2650],
-        [0.2979, 0.7141, 0.9069],
-        [0.1449, 0.1132, 0.1375],
-        [0.4675, 0.3947, 0.1426]])
-```
-Additionally, if you installed Pytorch with CUDA, you can check your GPU driver and CUDA are installed and accessible by Pytorch using the following command, which should return `True`. **If you chose not to install Pytorch with CUDA, skip this step.**
-```
-torch.cuda.is_available()
-```
-Once verified we can exit our Python shell
-```
->>> exit()
-```
-9. Install the remaining packages using the included `requirements.txt` file
-> Note: you will need to navigate to the same directory as the requirements file, or specify the exact location. The requirements file is located in the `KEEPTraining` folder of the repository
-```
-pip install -r requirements.txt
-```
-10. With the installation of the packages now complete, we can set a password for Jupyter to use using the following command
-> Note: Jupyter will display where it has stored your hashed password. Make a mental note of this location, as it is the same location where Jupyter configuration files will be stored by default.
-```
-jupyter notebook password
-```
-11. Start jupyter server and log in with the password you created to verify installation
-```
-jupyter notebook
-```
-After running this command you should be redirected to a browser window automatically displaying the main jupyter homepage.
-
-12. KEEP Training is now successfully installed. For instruction on how to create and run notebooks in Jupyter refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md)
-
-### <a id="InstallPytorch">How to Install Pytorch</a>
-For Pytorch installation with CUDA, you will be required to know which model of GPU the machine or server running KEEP has. If you are unsure, or do not have a CUDA capable GPU you may skip to step 3.
-1. Determine if you have a CUDA capable GPU
-	1. Navigate to https://developer.nvidia.com/cuda-gpus
-	2. Scroll down and check the expandable tables for your specific GPU model
-	3. Make note of the **Compute Capability** number next to your GPU model
-	4. If you determine you do not have a CUDA capable GPU, skip to step 3
-2. Determine which CUDA SDK to use
-	1. Navigate to https://pytorch.org/get-started/locally/
-	2. Make note of the Pytorch supported CUDA SDK's
-	
-	![Possible CUDA Versions](Images/KEEPTrainingInstallation/PossibleCUDAVersions.jpg)
-	
-	3. Navigate to https://en.wikipedia.org/wiki/CUDA#GPUs_supported
-	4. Find the Pytorch supported SDK's in the list and cross-reference with the **Compute Capability** number from step 1 to determine which SDK to use, generally the higher the SDK the better
-	> Note: This guide was tested using CUDA SDK 10.2, with Pytorch version 1.6.0
-	5. Navigate to https://developer.nvidia.com/cuda-toolkit-archive and download and install the CUDA Toolkit with the matching number of the SDK you just determined, for example, if you determined you need to use CUDA SDK 10.2, download CUDA Toolkit 10.2. When downloading choose **exe (local)**.
-3. Install Pytorch
-	1. Navigate to https://pytorch.org/get-started/locally/
-	2. Select the following options:
-		1. Pytorch Build: Stable
-		2. Your OS: What operating system KEEP will be running on
-		3. Package: Pip
-		4. Language: Python
-		5. CUDA: The SDK number you determined in step 2, or None
-		
-		![Pytorch Options](Images/KEEPTrainingInstallation/PytorchOptions.jpg)
-		
-	3. Copy the output from **Run this Command** and run the command in your shell **while the virtual environment is activated**
-	> Note: If you get an error during the running of this command about SSL certificates, you can modify the command to use Amazon AWS instead and try again. For example: 
-	```
-	pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
-	```
-	> would become: 
-	```
-	pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://s3.amazonaws.com/pytorch/whl/torch_stable.html
-	```
