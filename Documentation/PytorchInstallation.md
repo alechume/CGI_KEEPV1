@@ -10,7 +10,7 @@ For Pytorch installation with CUDA, you will be required to know which model of 
 	1. Navigate to https://pytorch.org/get-started/locally/
 	2. Make note of the Pytorch supported CUDA SDK's
 	
-	![Possible CUDA Versions](Images/KEEPTrainingInstallation/PossibleCUDAVersions.jpg)
+	![Possible CUDA Versions](Images/PytorchInstallation/PossibleCUDAVersions.jpg)
 	
 	3. Navigate to https://en.wikipedia.org/wiki/CUDA#GPUs_supported
 	4. Find the Pytorch supported SDK's in the list and cross-reference with the **Compute Capability** number from step 1 to determine which SDK to use, generally the higher the SDK the better
@@ -25,7 +25,7 @@ For Pytorch installation with CUDA, you will be required to know which model of 
 		4. Language: Python
 		5. CUDA: The SDK number you determined in step 2, or None
 		
-		![Pytorch Options](Images/KEEPTrainingInstallation/PytorchOptions.jpg)
+		![Pytorch Options](Images/PytorchInstallation/PytorchOptions.jpg)
 		
 	3. Copy the output from **Run this Command** and run the command in your shell **while the virtual environment is activated**
 	> Note: If you get an error during the running of this command about SSL certificates, you can modify the command to use Amazon AWS instead and try again. For example: 
