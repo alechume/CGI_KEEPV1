@@ -39,7 +39,7 @@ Please refer to the [Prerequisite Installation](https://github.com/alechume/CGI_
 
 ### <a id="DirectoryStructure">Building The Directory Structure</a>
 **KEEP Training's** directory structure will consist of a single **root** directory to act as a container, and 2 sub-directories, 1 containing the python virtual environment and 2 containing the Jupyter Notebook `.ipynb` folders and files.
-1. Begin with the [Prerequisite Installation](#PrerequisiteInstallation)
+1. Begin with the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md)
 2. Create a folder named `KEEPTraining` that will act as our **root** directory
 3. Inside the **root** directory, create a new folder named `Notebooks`
 4. Open your **command shell** and navigate to the inside of the **root** directory in your shell
