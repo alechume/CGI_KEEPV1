@@ -1,5 +1,4 @@
 # Pytorch Installation
-### <a id="InstallPytorch">How to Install Pytorch</a>
 For Pytorch installation with CUDA, you will be required to know which model of GPU the machine or server running KEEP has. If you are unsure, or do not have a CUDA capable GPU you may skip to step 3.
 1. Determine if you have a CUDA capable GPU
 	1. Navigate to https://developer.nvidia.com/cuda-gpus
