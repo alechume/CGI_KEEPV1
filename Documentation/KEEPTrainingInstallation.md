@@ -51,9 +51,9 @@ virtualenv KEEPTraining-env (You may replace KEEPTraining-env with anything you'
 ```
 6. Your directory structure should now match the following:
 ```
-└── KEEPTraining 			# Root directory
-    ├── KEEPTraining-env 	# Virtual python environment
-    └── Notebooks 			# Jupyter ipynb folder
+└── KEEPTraining            # Root directory
+    ├── KEEPTraining-env    # Virtual python environment
+    └── Notebooks           # Jupyter ipynb folder
 ```
 7. You are now ready to begin [Installation From Scratch](#InstallFromScratch)
 
