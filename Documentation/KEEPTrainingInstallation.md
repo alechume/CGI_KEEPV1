@@ -298,7 +298,7 @@ The IIS specific configuration should now be complete. Next we need to configure
 		<dt>c.NotebookApp.disable_check_xsrf</dt>
 		<dd>New versions of Jupyter include cross-site request forgeries protection, when using a reverse proxy we need to disable this to allow our kernals to start. This is due to a similar reason as the allow_origin setting.</dd>
 		<dt>c.NotebookApp.notebook_dir</dt>
-		<dd>Specifies the full path to the main startup directory for the Jupyter application. This should be set to our Notebook directory we created during installation, located within the root of the KEEP Training project. For example **C:\\Users\\alec.hume\\Documents\\GitHub\\CGI_KEEPV1\\KEEPTraining\\Notebooks**. </dd>
+		<dd>Specifies the full path to the main startup directory for the Jupyter application. This should be set to our Notebook directory we created during installation, located within the root of the KEEP Training project. For example "C:\\Users\\alec.hume\\Documents\\GitHub\\CGI_KEEPV1\\KEEPTraining\\Notebooks". </dd>
 		<dt>c.NotebookApp.open_browser</dt>
 		<dd>Specifies whether or not to open a browser automatically when the server first starts. Since we intend to serve our Jupyter application remotely and not locally, this is not necessary.</dd>
 		<dt>c.NotebookApp.port</dt>
