@@ -15,6 +15,7 @@
 	Python 3.8.5
 	```
 2. Download and install `Visual Studio Build Tools 2019 (C++ Build Tools)`
+	
 	**This step is optional, if you encounter "Failed building wheel for ..." problems during python package installation, you will need to complete this step**
 	1. Go to https://visualstudio.microsoft.com/downloads/
 	2. Scroll down to **All Downloads**
