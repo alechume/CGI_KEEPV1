@@ -1,14 +1,21 @@
 # Prerequisite Installation
 1. Download and install `Python` (version 3.8.5), be sure to check your system information to determine if you need 64bit vs 32bit
-	1. Go to https://www.python.org/downloads/
-	2. Include pip during installation
-	3. Add Python to your environment variables
-	4. Type `python -V` in cmd prompt, powershell, bash shell or equivalent to verify Python installation
+	1. Go to https://www.python.org/downloads/ and download the **executable installer**
+	2. Run the installer and follow the prompts
+	3. Check the box to include **pip** during installation
 
+	![Include Pip](Images/PrerequisiteInstallation/IncludePip.jpg)
+
+	4. Check the box to **install for all users** and **Add Python to environment variables**
+
+	![Install All Users](Images/PrerequisiteInstallation/InstallAllUsers.jpg)
+
+	5. Type `python -V` in cmd prompt, powershell, bash shell or equivalent to verify Python installation
 	```
 	Python 3.8.5
 	```
 2. Download and install `Visual Studio Build Tools 2019 (C++ Build Tools)`
+**This step is optional, if you encounter "Failed build wheel for ..." problems during python package installation, you will need to complete this step**
 	1. Go to https://visualstudio.microsoft.com/downloads/
 	2. Scroll down to **All Downloads**
 	3. Click the dropdown for **Tools for Visual Studio 2019**
