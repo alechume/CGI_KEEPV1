@@ -38,7 +38,7 @@ For many of the installation steps you should be familiar with using a command s
 Please refer to the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md) guide for details.
 
 ### <a id="DirectoryStructure">Building The Directory Structure</a>
-**KEEP Training's** directory structure will consist of a single **root** directory to act as a container, and 2 sub-directories, 1 containing the python virtual environment and 2 containing the Jupyter Notebook `.ipynb` folders and files.
+**KEEP Training's** directory structure will consist of a single **root** directory to act as a container, and 2 sub-directories, 1 containing the python virtual environment and 1 containing the Jupyter Notebook `.ipynb` folders and files.
 1. Begin with the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md)
 2. Create a folder named `KEEPTraining` that will act as our **root** directory
 3. Inside the **root** directory, create a new folder named `Notebooks`
@@ -58,13 +58,13 @@ virtualenv KEEPTraining-env (You may replace KEEPTraining-env with anything you'
 7. You are now ready to begin [Installation From Scratch](#InstallFromScratch)
 
 ### <a id="InstallFromScratch">Installation From Scratch</a>
-1. Open your **command shell** and navigate to the inside of the **root** directory in your shell
-2. Activate the virtual environment you created in order to start installing required packages
-> Note: You will need to activate this virtual environment every time you want to work with this project, you can deactive the environment when finished with the `deactivate` command
+1. Open your **command shell** and navigate to the inside of the **root** directory
+2. Activate the virtual environment you created in order to start installing the required packages
+> Note: You will need to activate this virtual environment every time you want to work with this project, you can deactivate the environment when finished with the `deactivate` command
 ```
 .\KEEPTraining-env\Scripts\activate
 ```
-The output in your shell window should now be prefaced with the environment name in brackets:
+The output in your shell should now be prefaced with the environment name in brackets:
 ```
 (KEEPTraining-env) C:\Some\path>
 ```
@@ -130,20 +130,20 @@ pip install jupyter==1.0.0
 ```
 jupyter notebook password
 ```
-13. Start jupyter server and log in with the password you created to verify installation
+13. Start the Jupyter server and log in with the password you created to verify installation
 ```
 jupyter notebook
 ```
-After running this command you should be redirected to a browser window automatically displaying the main jupyter homepage.
+After running this command you should be redirected to a browser window automatically displaying the main Jupyter homepage.
 
-14. KEEP Training is now successfully installed. If you only intend to use KEEP Training locally, you can refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md) for how to create and run notebooks in Jupyter. If you would like to access KEEP Training externally, continue on to the [KEEP Training IIS Configuration](#IISConfiguration) section.
+14. KEEP Training is now successfully installed. If you only intend to use **KEEP Training** locally, you can refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md) for how to create and run notebooks in Jupyter. If you would like to access KEEP Training externally, continue on to the [KEEP Training IIS Configuration](#IISConfiguration) section.
 
 ### <a id="IISConfiguration">KEEP Training IIS Configuration</a>
-KEEP Training is a Jupyter Notebook application. Jupyter Notebooks applications use their own server and cannot be natively configured to run using IIS. To get around this, we can configure IIS to act as a **reverse proxy** for the Jupyter server so we can access it as we would any other website.
+**KEEP Training** is a Jupyter Notebook application. Jupyter applications use their own server and cannot be natively configured to run using IIS. To get around this, we can configure IIS to act as a **reverse proxy** for the Jupyter server so we can access it as we would any other website.
 
 #### <a id="IISPrerequisites">Prerequisites</a>
 1. [Windows IIS (Internet Information Services)](https://www.iis.net/) = 10.0
-2. [WebSocket Protocal enabled for IIS](https://docs.microsoft.com/en-us/iis/configuration/system.webserver/websocket)
+2. [WebSocket Protocol enabled for IIS](https://docs.microsoft.com/en-us/iis/configuration/system.webserver/websocket)
 2. [URL Rewrite Module for IIS](https://www.iis.net/downloads/microsoft/url-rewrite) = 2.1
 3. [Application Request Routing Module for IIS](https://www.iis.net/downloads/microsoft/application-request-routing) = 2.5
 
@@ -152,7 +152,7 @@ We'll begin by installing **Windows IIS** (Internet Information Services) with *
 1. Install Windows IIS (Internet Information Services) with WebSocket Protocol
 	1. Open **Control Panel**
 	2. In the **Control Panel** search box, type **windows features**
-	3. Under **Programs and Features, click **Turn Windows features on or off**
+	3. Under **Programs and Features**, click **Turn Windows features on or off**
 
 	![Programs and Features](Images/KEEPTrainingInstallation/ProgramsAndFeatures.jpg)
 
@@ -166,7 +166,7 @@ We'll begin by installing **Windows IIS** (Internet Information Services) with *
 		3. Under **Administrative Tools** click **View local services**
 		4. Scroll down the list of services until you find **World Wide Web Publishing Service**
 		5. Ensure the service is running, if not right click and select **Start**
-2. Install URL Rewrite and Application Request Routing modules
+2. Install **URL Rewrite** and **Application Request Routing** modules
 	1. From the **Windows start menu**, search for **IIS Manager**
 	2. In **IIS Manager**, click the **Web Platform Installer** icon
 
@@ -268,7 +268,7 @@ The IIS specific configuration should now be complete. Next we need to configure
 	4. Once Jupyter has finished generating the configuration it will display the location where it has been stored, navigate to this location and open the **jupyter_notebook_config.py** file
 	> Note: If you created a password during installation, this folder will also contain a jupyter_notebook_config.json file. This file stores the hashed password and should not be confused with the main config file which ends with .py
 
-	5. Next you will need to find and modify several configuration settings. For each setting you will need to **un-comment** the line first, before making changes. **Hint: using the search function of your text editor will make this much easier**
+	5. Next you will need to find and modify several configuration settings. For each setting you will need to **un-comment** the line first, before making changes. **Hint: using the search function of your text editor will make finding the configuration settings much easier**
 	6. Find each setting listed under the **Setting** heading of the following table and change the argument to match whatever is under the **Arugment** heading.
 	> Note: The argument is everything after the "="" sign
 
@@ -294,7 +294,7 @@ The IIS specific configuration should now be complete. Next we need to configure
 		<dt>c.NotebookApp.allow_origin</dt>
 		<dd>Because we are using a reverse proxy, the origin of our requests is not always what Jupyter expects. By setting the allowed origins to an asterisk `*` we can prevent errors due to mis-matched origins.</dd>
 		<dt>c.NotebookApp.base_url</dt>
-		<dd>The base url adds whatever we specify to the URL address bar in our browser. Since we configured Jupyter to run as a sub-application the argument here needs to match whatever **Alias** we used when creating the sub-application. Failure to do so results in 404 errors during request routing.</dd>
+		<dd>The base url adds whatever we specify to the URL address bar in our browser. Since we configured Jupyter to run as a sub-application the argument here needs to match whatever Alias we used when creating the sub-application. Failure to do so results in 404 errors during request routing.</dd>
 		<dt>c.NotebookApp.disable_check_xsrf</dt>
 		<dd>New versions of Jupyter include cross-site request forgeries protection, when using a reverse proxy we need to disable this to allow our kernals to start. This is due to a similar reason as the allow_origin setting.</dd>
 		<dt>c.NotebookApp.notebook_dir</dt>
@@ -304,7 +304,7 @@ The IIS specific configuration should now be complete. Next we need to configure
 		<dt>c.NotebookApp.port</dt>
 		<dd>Specifies the port that Jupyter will listen on. This should match whatever port we chose during URL Rewrite configuration.</dd>
 		<dt>c.NotebookApp.quit_button</dt>
-		<dd>Allows us to enable or disable the Quit button on the Jupyter browser UI. If left enabled, a user could shut the Jupyter server down completely from the UI.</dd>
+		<dd>Allows us to enable or disable the Quit button on the Jupyter browser UI. If left enabled, a user could shut the Jupyter server down remotely from the UI.</dd>
 		<dt>c.NotebookApp.terminals_enabled</dt>
 		<dd>By default Jupyter allows the use of in-browser terminals. This setting simply disables that functionality, this does not make the server more secure, since everything that could otherwise be done in a terminal can be done in a notebook.</dd>
 	</dl>
@@ -326,3 +326,5 @@ The IIS specific configuration should now be complete. Next we need to configure
 	![Jupyter Browser Tree](Images/KEEPTrainingInstallation/JupyterBrowserTree.jpg)
 
 	11. KEEP Training is now successfully installed and hosted with IIS. Refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md) for how to create and run notebooks in Jupyter
+
+	**WARNING** Following this configuration will not create a secure server and should only be used for accessing Jupyter from **within secure networks**. If you would like to learn how to secure your Jupyter server, refer to the [official documentation](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html)
