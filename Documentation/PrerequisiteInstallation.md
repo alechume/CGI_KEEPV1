@@ -15,7 +15,7 @@
 	Python 3.8.5
 	```
 2. Download and install `Visual Studio Build Tools 2019 (C++ Build Tools)`
-**This step is optional, if you encounter "Failed build wheel for ..." problems during python package installation, you will need to complete this step**
+	**This step is optional, if you encounter "Failed building wheel for ..." problems during python package installation, you will need to complete this step**
 	1. Go to https://visualstudio.microsoft.com/downloads/
 	2. Scroll down to **All Downloads**
 	3. Click the dropdown for **Tools for Visual Studio 2019**
@@ -30,7 +30,7 @@
 	![Visual Studio Build Tools](Images/PrerequisiteInstallation/VisualStudioBuildTools.jpg)
 	
 	7. Click install
-3. Install `virtualenv` using Python Pip
+3. Install `virtualenv` using **Pip**
 	1. Open a command shell (cmd prompt, PowerShell, bash or equivalent)
 	2. Run the following command
 	```
