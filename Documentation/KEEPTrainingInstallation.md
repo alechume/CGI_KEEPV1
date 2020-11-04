@@ -182,7 +182,114 @@ We'll begin by installing **Windows IIS** (Internet Information Services) with *
 			2. https://www.iis.net/downloads/microsoft/application-request-routing
 
 #### <a id="CreateReverseProxy">Creating the Reverse Proxy</a>
-TO DO
+With the prerequisite installation complete we can create the reverse proxy that will forward requests to our Jupyter server. We'll do this by configuring our proxy as a **sub-application** of the default IIS website. The main advantage here is that we'll be able to access KEEP Training from the same hostname as the default website.
+1. Enable proxy settings
+	1. In **IIS Manager**, click the **Application Request Routing** icon
+
+	![Application Request Routing](Images/KEEPTrainingInstallation/ApplicationRequestRouting.jpg)
+
+	2. In the right-side **Actions** menu, click **Server Proxy Settings...**
+	3. Check the box for **Enabled Proxy**, you can leave the other settings as their defaults
+
+	![Enable Proxy](Images/KEEPTrainingInstallation/EnableProxy.jpg)
+
+2. Add a sub-application to the default website
+	1. In the left-side **Connections** menu, expand the **server** and the **Sites** folder
+	2. Right-click the **Default Web Site** and select **Add Application**
+
+	![Add Application](Images/KEEPTrainingInstallation/AddApplication.jpg)
+
+	3. In the **Add Application** screen, enter `KEEPTraining` as the **Alias**
+	4. Since we will be configuring a reverse proxy, the **Physical path:** doesn't really matter, in our case we'll set it to the **root** directory that we created during installation.
+
+	![Add Application Settings](Images/KEEPTrainingInstallation/AddApplicationSettings.jpg)
+
+	5. Click **OK**, you should now see the new **sub-application** in the left-side **Connections** menu
+
+	![Connections Menu](Images/KEEPTrainingInstallation/ConnectionsMenu.jpg)
+
+3. Configure the URL Rewrite settings
+	1. Select the new **sub-application** you created in the previous step
+	2. Click the **URL Rewrite** icon
+
+	![URL Rewrite](Images/KEEPTrainingInstallation/URLRewrite.jpg)
+
+	3. In the right-side **Actions** menu, click **Add Rules(s)...**
+	4. Select **Blank rule** under the **Inbound rules** section
+
+	![Blank Rule](Images/KEEPTrainingInstallation/BlankRule.jpg)
+
+	5. Enter `Jupyter Reverse Proxy` in the **Name:** field
+	6. Select `Matches the Pattern` in the **Requested URL:** field
+	7. Select `Regular Expressions` in the **Using:** field
+	8. Enter `(.*)` in the **Pattern:** field
+	9. Check the box for **Ignore case**
+	10. Expand the **Conditions** section
+	11. Select `Match All` in the **Logical grouping:** field
+	12. Click **Add...** inside the **Conditions** section
+		1. Enter `{CACHE_URL}` in the **Condition input:** field
+		2. Select `Matches the Pattern` in the **Check if input string:** field
+		3. Enter `^(https?)://` in the **Pattern** field
+		4. Check the box for **Ignore case**
+		5. Click **OK**
+
+		![Add Condition](Images/KEEPTrainingInstallation/AddCondition.jpg)
+
+	13. Scroll down to the **Action** section
+	14. Select `Rewrite` in the **Action type:** field
+	15. Enter `{C:1}://localhost:85/keeptraining/{R:1}` in the **Rewrite URL:** field
+	> Note: In our example case we are going to be using port 85, in reality you can use whatever port you want so long as you configure Jupyter to use the same port, which is covered in the Jupyter Configuration section of this guide.
+
+	16. Check the box for **Append query string**
+	17. Check the box for **Stop processing of subsequent rules**
+	18. Your settings should now resemble the following:
+
+	![Blank Rule Settings](Images/KEEPTrainingInstallation/BlankRuleSettings.jpg)
+
+	19. In the right-side **Actions** menu, click **Apply**
+	20. In the right-side **Actions** menu, click **Back to Rules**
+	21. You should now see the rule you created in the **Inbound rules** section
+	> Note: Take note of the contents of Input which should now read `URL path after '/KEEPTraining/'`. This is the information that needs to be added to the end of the default website hostname to access our sub-application. For example: http://localhost/KEEPTraining/
+
+	![New Rule](Images/KEEPTrainingInstallation/NewRule.jpg)
 
 #### <a id="JupyterConfiguration">Jupyter Configuration</a>
-TO DO
+The IIS specific configuration should now be complete. Next we need to configure Jupyter itself. First we will generate a configuration file and then make the necessary modifications.
+1. Generate the configuration file
+	1. Open your **command shell** and navigate to the inside of the **root** directory of the **KEEP Training** project
+	2. Activate the **KEEP Training virtual environment**
+	```
+	.\KEEPTraining-env\Scripts\activate
+	```
+	3. Generate the jupyter configuration file using the following command
+	```
+	jupyter notebook --generate-config
+	```
+	4. Once Jupyter has finished generating the configuration it will display the location where it has been stored, navigate to this location and open the **jupyter_notebook_config.py** file
+	> Note: If you created a password during installation, this folder will also contain a jupyter_notebook_config.json file. This file stores the hashed password and should not be confused with the main config file which ends with .py
+
+	5. Next you will need to find and modify several configuration settings. For each setting you will need to **un-comment** the line first, before making changes. **Hint: using the search function of your text editor will make this much easier**
+	6. Find each setting listed under the **Original** heading of the following table and set it to match what's under the **Modified** heading
+	| Original                                      | Modified                                 |
+	| --------------------------------------------- | ---------------------------------------- |
+	| c.NotebookApp.allow_origin = ''               | c.NotebookApp.allow_origin = '\*'        |
+	| c.NotebookApp.base_url = '/'                  | c.NotebookApp.base_url = '/keeptraining' |
+	| c.NotebookApp.disable_check_xsrf = False      | SOMETHING                                |
+	| c.NotebookApp.ip = 'localhost'                | SOMETHING                                |
+	| c.NotebookApp.local_hostnames = ['localhost'] | SOMETHING                                |
+	| c.NotebookApp.notebook_dir = ''               | SOMETHING                                |
+	| c.NotebookApp.open_browser = True             | SOMETHING                                |
+	| c.NotebookApp.port = 8888                     | SOMETHING                                |
+	| c.NotebookApp.quit_button = True              | SOMETHING                                |
+	| c.NotebookApp.terminals_enabled = True        | SOMETHING                                |
+
+	<dl>
+		<dt>c.NotebookApp.allow_origin</dt>
+		<dd>Some explanation</dd>
+		<dt>c.NotebookApp.base_url</dt>
+		<dd>Some explanation</dd>
+		<dt>c.NotebookApp.disable_check_xsrf</dt>
+		<dd>Some explanation</dd>
+		<dt>c.NotebookApp.ip</dt>
+		<dd>Some explanation</dd>
+	</dl>
