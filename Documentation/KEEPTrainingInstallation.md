@@ -327,4 +327,4 @@ The IIS specific configuration should now be complete. Next we need to configure
 
 	11. KEEP Training is now successfully installed and hosted with IIS. Refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md) for how to create and run notebooks in Jupyter
 
-	**WARNING** Following this configuration will not create a secure server and should only be used for accessing Jupyter from **within secure networks**. If you would like to learn how to secure your Jupyter server, refer to the [official documentation](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html)
+	**WARNING:** Following this configuration will not create a secure server and should only be used for accessing Jupyter from **within secure networks**. If you would like to learn how to secure your Jupyter server, refer to the [official documentation](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html)
