@@ -269,27 +269,60 @@ The IIS specific configuration should now be complete. Next we need to configure
 	> Note: If you created a password during installation, this folder will also contain a jupyter_notebook_config.json file. This file stores the hashed password and should not be confused with the main config file which ends with .py
 
 	5. Next you will need to find and modify several configuration settings. For each setting you will need to **un-comment** the line first, before making changes. **Hint: using the search function of your text editor will make this much easier**
-	6. Find each setting listed under the **Original** heading of the following table and set it to match what's under the **Modified** heading
-	| Original                                      | Modified                                 |
-	| --------------------------------------------- | ---------------------------------------- |
-	| c.NotebookApp.allow_origin = ''               | c.NotebookApp.allow_origin = '\*'        |
-	| c.NotebookApp.base_url = '/'                  | c.NotebookApp.base_url = '/keeptraining' |
-	| c.NotebookApp.disable_check_xsrf = False      | SOMETHING                                |
-	| c.NotebookApp.ip = 'localhost'                | SOMETHING                                |
-	| c.NotebookApp.local_hostnames = ['localhost'] | SOMETHING                                |
-	| c.NotebookApp.notebook_dir = ''               | SOMETHING                                |
-	| c.NotebookApp.open_browser = True             | SOMETHING                                |
-	| c.NotebookApp.port = 8888                     | SOMETHING                                |
-	| c.NotebookApp.quit_button = True              | SOMETHING                                |
-	| c.NotebookApp.terminals_enabled = True        | SOMETHING                                |
+	6. Find each setting listed under the **Setting** heading of the following table and change the argument to match whatever is under the **Arugment** heading.
+	> Note: The argument is everything after the "="" sign
+
+	**Mandatory Settings**
+
+	| Setting                                       | Arugment                          |
+	| --------------------------------------------- | ----------------------------------|
+	| c.NotebookApp.allow_origin = ''               | = '\*'                            |
+	| c.NotebookApp.base_url = '/'                  | = '/keeptraining'                 |
+	| c.NotebookApp.disable_check_xsrf = False      | = True                            |
+	| c.NotebookApp.port = 8888                     | = 85                              |
+
+	**Optional Settings**
+
+	| Setting                                       | Arugment                          |
+	| --------------------------------------------- | ----------------------------------|
+	| c.NotebookApp.notebook_dir = ''               | = 'Full path to Notebooks folder' |
+	| c.NotebookApp.open_browser = True             | = False                           |
+	| c.NotebookApp.quit_button = True              | = False                           |
+	| c.NotebookApp.terminals_enabled = True        | = False                           |
 
 	<dl>
 		<dt>c.NotebookApp.allow_origin</dt>
-		<dd>Some explanation</dd>
+		<dd>Because we are using a reverse proxy, the origin of our requests is not always what Jupyter expects. By setting the allowed origins to an asterisk `*` we can prevent errors due to mis-matched origins.</dd>
 		<dt>c.NotebookApp.base_url</dt>
-		<dd>Some explanation</dd>
+		<dd>The base url adds whatever we specify to the URL address bar in our browser. Since we configured Jupyter to run as a sub-application the argument here needs to match whatever **Alias** we used when creating the sub-application. Failure to do so results in 404 errors during request routing.</dd>
 		<dt>c.NotebookApp.disable_check_xsrf</dt>
-		<dd>Some explanation</dd>
-		<dt>c.NotebookApp.ip</dt>
-		<dd>Some explanation</dd>
+		<dd>New versions of Jupyter include cross-site request forgeries protection, when using a reverse proxy we need to disable this to allow our kernals to start. This is due to a similar reason as the allow_origin setting.</dd>
+		<dt>c.NotebookApp.notebook_dir</dt>
+		<dd>Specifies the full path to the main startup directory for the Jupyter application. This should be set to our Notebook directory we created during installation, located within the root of the KEEP Training project.</dd>
+		<dt>c.NotebookApp.open_browser</dt>
+		<dd>Specifies whether or not to open a browser automatically when the server first starts. Since we intend to serve our Jupyter application remotely and not locally, this is not necessary.</dd>
+		<dt>c.NotebookApp.port</dt>
+		<dd>Specifies the port that Jupyter will listen on. This should match whatever port we chose during URL Rewrite configuration.</dd>
+		<dt>c.NotebookApp.quit_button</dt>
+		<dd>Allows us to enable or disable the Quit button on the Jupyter browser UI. If left enabled, a user could shut the Jupyter server down completely from the UI.</dd>
+		<dt>c.NotebookApp.terminals_enabled</dt>
+		<dd>By default Jupyter allows the use of in-browser terminals. This setting simply disables that functionality, this does not make the server more secure, since everything that could otherwise be done in a terminal can be done in a notebook.</dd>
 	</dl>
+
+	For more detailed information about Jupyter configuration settings, refer to the [official documentation](https://jupyter-notebook.readthedocs.io/en/stable/config.html)
+
+	7. Return to your **command shell** and navigate to the inside of the **Notebooks** folder located in the **root** of the **KEEP Training** project
+	```
+	cd Notebooks
+	```
+	8. Start the Jupyter server
+	> Note: If you set the optional notebook_dir setting, you do not need to navigate into the Notebooks folder. You may start the Jupyter server from any location
+	```
+	jupyter notebook
+	```
+	9. Navigate to http://localhost/keeptraining/ in your browser. Replace /keeptraining/ with whatever you chose as an **Alias** during the creation of the sub-application
+	10. You should be automatically redirected to the Jupyter browser tree
+
+	![Jupyter Browser Tree](Images/KEEPTrainingInstallation/JupyterBrowserTree.jpg)
+
+	11. KEEP Training is now successfully installed and hosted with IIS. Refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md) for how to create and run notebooks in Jupyter
