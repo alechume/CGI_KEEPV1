@@ -367,7 +367,6 @@ With the prerequisite installation complete, we can now configure the **FastCGI*
 			![Block Inheritance](Images/KEEPAppInstallation/BlockInheritance.jpg)
 
 			4. Click **OK** to close the **Advanced Security Settings** screen
-			5. 
 	5. Click **OK** to close the **Properties** screen
 	> Note: We have only added **Read** and **Execute** permissions. For certain Django projects, it may be necessary to add **Write** and **Modify** permissions to **IUSR** and **IIS_IUSRS** as well
 	6. You should now be able to access **KEEP App** through IIS at http://localhost/keepapp/ in your browser. Replace `/keepapp/` with whatever you chose as an **Alias** during the creation of the **sub-application**
@@ -377,7 +376,7 @@ With the prerequisite installation complete, we can now configure the **FastCGI*
 
 
 #### <a id="DjangoHostnameConfiguration">Django Hostname Configuration</a>
-
+TO DO
 
 7. Adding a hostname binding
 	> Note: Proper DNS configuration is required to properly serve websites with custom hostname bindings. We will be faking this by manually configuring our local hosts file. This will only work if we are accessing the site from the same machine it is being hosted on, proper DNS configuration will not be covered in this guide
