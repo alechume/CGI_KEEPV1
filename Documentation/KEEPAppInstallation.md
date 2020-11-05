@@ -10,9 +10,13 @@
 9. [Connecting KEEPApp to Jira](#ConnectKEEPAppJira)
 
 ### <a id="Introduction">Introduction</a>
-Below you will find the instructions on the installation of the Django backend application responsible for using the model trained with KEEP Training. The installation of KEEP Training is NOT required, but a trained text classification model IS required. For the purpose of this tutorial all software and package prerequisites will be listed, and it will be assumed you are using the same versions. You may attempt installation using differing versions, but results may vary.
+Below you will find the instructions on the installation of the Django backend application that comprises **KEEP App**. For the purpose of this tutorial all software and package prerequisites will be listed, and it will be assumed you are using the same versions. You may attempt installation using differing versions, but results may vary.
 
-For many of the installation steps you should be familiar with using a command shell (CMD, PowerShell, Bash or equivalent). It will also be helpful to be familiar with Django application structure and files, though not required.
+It will also be assumed you are using the same directory structure for the project as described below. You may attempt to use a different directory structure, but you will need to be able to modify file-paths accordingly.
+
+**KEEP App** makes use of a **text classification neural network model** called `KEEPModel.pkl` trained using **KEEP Training**. The installation of **KEEP Training** is **not** necessarily required, but the KEEP text classification model **is** required.
+
+For many of the installation steps you should be familiar with using a command shell (cmd prompt, PowerShell, Bash or equivalent), it will also be helpful to be familiar with Django and its file structure, though not required.
 
 ### <a id="SoftwarePrerequisites">Software Prerequisites</a>
 1. [Python](https://www.python.org/downloads/) = 3.8.5
@@ -30,38 +34,44 @@ For many of the installation steps you should be familiar with using a command s
 ### <a id="PrerequisiteInstallation">Prerequisite Installation</a>
 Please refer to the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md) guide for details.
 
-### <a id="InstallFromScratch">Installation From Scratch</a>
-1. Begin with the [Prerequisite Installation](#PrerequisiteInstallation)
-2. Create a folder to act as the root directory for KEEP and navigate to this folder in your shell
+### Build The Directory Structure
+**KEEP App's** directory structure will consist of a single **root** directory to act as a container, and 2 sub-directories, 1 containing the python virtual environment and 1 containing the Django folders and files.
+1. Begin with the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md)
+2. Create a folder named `KEEPApp` that will act as our **root** directory
+3. Inside the **root** directory, create a new folder named `src`, this will eventually contain our Django folders and files
+4. Open you **command shell** and navigate to the inside of the **root** directory in your shell
 > Note: Ensure your shell is running in administrator mode or equivalent
-```
-cd path/to/folder
-```
-3. Install `virtualenv` using pip
-```
-pip install virtualenv
-```
-4. Create a `virtual python environment` to contain Python dependancies using the following command
+5. Create a `virtual python environment` to contain Python dependancies using the following command
 > Note: A `virtual python environment` allows us to keep all our installed packages and dependancies local to the project we're working on, effectively allowing us to install different versions of packages for different projects without interference.
 ```
-virtualenv ENVName-env (Replace ENVName-env with anything you'd like)
+virtualenv KEEPApp-env (You may replace KEEPApp-env with anything you'd like)
 ```
-5. Activate the virtual environment you just created in order to start installing required packages
-> Note: You will need to activate this virtual environment every time you want to work with this project from the cmd line or shell, you can deactive the environment when finished with the `deactivate` command.
+6. Your directory structure should now match the following:
 ```
-.\ENVName-env\Scripts\activate
+└── KEEPApp            # Root directory
+    ├── KEEPApp-env    # Virtual python environment
+    └── src            # Django source folder
 ```
-The output in the shell window should now be prefaced with the environment name in brackets:
+7. You are now ready to begin [Installation From Scratch](#InstallFromScratch)
+
+### <a id="InstallFromScratch">Installation From Scratch</a>
+1. Open your **command shell** and navigate to the inside of the **root** directory
+2. Activate the virtual environment you created in order to start installing the required packages
+> Note: You will need to activate this virtual environment every time you want to work with this project, you can deactivate the environment when finished with the `deactivate` command
 ```
-(ENVName-env) C:\Some\path>
+.\KEEPApp-env\Scripts\activate
 ```
-6. Before we begin installing the required packages we need to upgrade the pip installer with the following command
+The output in your shell should now be prefaced with the environment name in brackets:
+```
+(KEEPApp-env) C:\Some\path>
+```
+3. Before we begin installing the required packages we need to upgrade the pip installer with the following command
 ```
 python -m pip install --upgrade pip
 ```
-7. Now we are ready to begin installing our required packages. First we'll install Pytorch
-> In general it is best to install the same version of Pytorch that was used to train the model. If you are unsure which version was used, you will either need to find out, or attempt to install the correct version through trial and error. Please refer to the [Pytorch Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PytorchInstallation.md) guide for details.
-8. Verify Pytorch installation by first entering a Python shell using the following command
+4. Now we are ready to begin installing our required packages. First we'll install Pytorch
+> In general, it is best to install the same version of Pytorch that was used to train the model. If you are unsure which version was used, you will either need to find out, or attempt to install and correct version through trial and error. Please refer to the [Pytorch Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PytorchInstallation.md) guide for details.
+5. Verify Pytorch installation by first entering a Python shell using the following command
 ```
 python
 ```
@@ -88,57 +98,57 @@ Once verified we can exit our Python shell
 ```
 >>> exit()
 ```
-9. Install Fastai 1.0.61 **(with your python virtual environment activated)**
+6. Install Fastai 1.0.61
 ```
 pip install fastai==1.0.61
 ```
-10. Install SpaCy 2.3.2 **(with your python virtual environment activated)**
+7. Install SpaCy 2.3.2
 ```
 pip install spacy==2.3.2
 ```
-11. Install Django 2.1.10 **(with your python virtual environment activated)**
+8. Install Django 2.1.10
 ```
 pip install django==2.1.10
 ```
-12. Install wfastcgi 3.0.0 **(with your python virtual environment activated)**
+9. Install wfastcgi 3.0.0
 ```
 pip install wfastcgi==3.0.0
 ```
-13. The KEEP App package requirements are now successfully installed, you can now move on to creating the Django application backend for KEEP App.
-> Please refer to the [Creating the Django Application](#CreateDjangoApp) section of this installation guide for details.
+10. With the installation of the packages now complete, we can move on to the [Creating the Django Application](#CreateDjangoApp) section
 
 ### <a id="CreateDjangoApp">Creating the Django Application</a>
-1. From the root directory of the KEEP App project, create a new folder called `src` to keep the Django application files contained
-2. From your shell, navigate to the root directory of the KEEP App project
+**KEEP App** is a Django application. Django is a web framework designed to allow the use of Python code to be used to handle http requests. We will be creating our Django application as a REST style API that can be connected to externally.
+1. Open your **command shell** and navigate to the inside of the **root** directory
+2. Activate the virtual environment you created
 ```
-cd path/to/folder
+.\KEEPApp-env\Scripts\activate
 ```
-3. Activate the KEEP App virtual environment
+3. Create the main Django project with the following command
+> Note: This command will create a manage.py file and a subfolder with the same name as your project-name within the `src` folder. Take note of the location of the manage.py file, as this will be needed for a number of commands later
 ```
-.\ENVName-env\Scripts\activate (Replace ENVName-env with the name of the KEEP App virtual environment)
+django-admin startproject keepapi src (You may replace keepapi with anything you'd like)
 ```
-4. Create the main Django application inside the `src` folder by using the following command
-> Note: This command will create a manage.py file and a subfolder with the same name as your project-name within the src folder. Take note of the location of the manage.py file, as this will be used for a number of commands later.
-```
-django-admin startproject project-name src (Replace project-name with whatever you'd like)
-```
-5. In your shell, navigate to the `src` folder you created
+4. In your shell, navigate to the inside of the `src` folder
 ```
 cd src
 ```
-6. Most Django applications are broken up into smaller pieces called Apps, we will use the same principle with KEEP by creating a keep app within our Django project. From the `src` folder run the following command
+5. Most Django applications are broken up into smaller chunks called **Apps**, we will use the same principle with KEEP by creating a **keep** app without our Django project. We can do this with the following command
 ```
-django-admin startapp app-name (Replace app-name with anything you'd like i.e. keep)
+django-admin startapp keep (You may replace keep with anything you'd like)
 ```
-7. Navigate to the `src` folder using the file-system. In the src folder you should see a similar structure:
+6. If you navigate to the `src` folder using your file-system, you should see a file structure that resembles the following:
 
 ![Src Folder Structure](Images/KEEPAppInstallation/SrcFolder.jpg)
 
-8. Open the folder with the name that matches whatever app-name you set previously, it should look like the following:
+7. Inside the `keep` folder, you should see the following files:
 
 ![App Folder Structure](Images/KEEPAppInstallation/AppFolder.jpg)
 
-9. Using your favorite text editor, open the `views.py` file and replace the contents with the following:
+8. Inside the `keepapi` folder, you should see the following files:
+
+![Project Folder Structure](Images/KEEPAppInstallation/ProjectFolder.jpg)
+
+9. Inside the `keep` folder, open the `views.py` file using your favorite text editor and replace the contents with the following:
 ```Python
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
@@ -158,7 +168,7 @@ def predict(request):
 		pred = argmax(model.predict(request.POST.get('details'))[2])
 		return JsonResponse(int(pred), safe=False)
 ```
-10. Create a new file named `urls.py` and fill it with the following:
+10. Inside the `keep` folder, create a new **python file** named `urls.py` and fill it with the following:
 ```Python
 from django.urls import path
 
@@ -168,12 +178,8 @@ urlpatterns = [
 	path('', predict, name='predict'),
 ]
 ```
-11. Create a new folder named `models` and copy the `KEEPModel.pkl` file that was trained using KEEP Training into this folder
-12. Return to the `src` folder and navigate to the folder matching the project-name you set previously (Not the app-name). The folder should contain the following files:
-
-![Project Folder Structure](Images/KEEPAppInstallation/ProjectFolder.jpg)
-
-13. Modify the `settings.py` file `INSTALLED_APPS` section to match the following:
+11. Inside the `keep` folder, create a new **folder** named `models`. Copy the **text classification model** named `KEEPModel.pkl` into this folder. This model was generated by **KEEP Training**, refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md) for details on how to create and find this file
+12. Inside the `keepapi` folder, open the `settings.py` file using your favorite text editor. Find the `INSTALLED_APPS` section and include the **app** we created during step 5 like so:
 ```Python
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -184,10 +190,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #Custom Apps
-    'app-name', # Replace app-name with your specific app name
+    'keep', # Replace keep with your specific app name (if you chose something different)
 ]
 ```
-14. Modify the `urls.py` file to match the following:
+13. Inside the `keepapi` folder, open the `urls.py` file using your favorite text editor and replace the contents with the following:
 ```Python
 from django.contrib import admin
 from django.urls import path
@@ -195,16 +201,18 @@ from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('model/', include('app-name.urls')), # Replace app-name with your specific app name
+    path('model/', include('keep.urls')), # Replace keep with your specific app name (if you chose something different)
 ]
 ```
-15. Ensure all file modifications are saved
-16. With your shell, navigate to the `src` folder which contains the `manage.py` file and run the following command
+14. Ensure all files have been saved
+15. In your **command shell** navigate to the inside of the `src` folder
+16. Start the **Django development server** with the following command
+> Note: The Django development server is a basic web-server not suitable for production deployment. In this instance we will be using it to test basic configuration only
 ```
 python manage.py runserver
 ```
 When the django development server has successfully started you should see output similar to the following:
-> Note: By default the Django development server runs on port 8000. If you need to use a different port, you can specify a URL and port combination for Django to use by modifying the runserver command. Example: `python manage.py runserver 127.0.0.1:85`
+> Note: By default the Django development server runs on port 8000. If you need to use a different port, you can specify a URL and port combination for Django to use by modifying the runserver command. Example: `python manage.py runserver 127.0.0.1:85` would start the server using port 85
 ```
 System check identified no issues (0 silenced).
 October 27, 2020 - 15:24:04
@@ -213,87 +221,123 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 ```
 17. Navigate to `http://127.0.0.1:8000/model/` you should be presented with a `405 error`. This indicates that you have successfully reached the django view, but since the view only accepts POST requests there is nothing to actually display.
-18. With the Django server successfully installed and configured, you are now ready to move on to [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
+
+![405 Error](Images/KEEPAppInstallation/405Error.jpg)
+
+18. The Django server is now successfully installed and configured for local use, we are now ready to move on to the [Hosting KEEP App on IIS](#HostingKEEPAppIIS) section
 
 ### <a id="HostingKEEPAppIIS">Hosting KEEP App on IIS</a>
-1. Begin with [Installation From Scratch](#InstallFromScratch)
-2. Install Windows IIS (Internet Information Services)
-	1. Open Control Panel
-	2. In the Control Panel search box, type **windows features**
-	3. Under **Programs and Features** click **Turn Windows features on or off**
-	4. Check the box next to **Internet Information Services** and expland the World Wide Web Services and Application Development Features menus. Check the box next to **CGI**
-	
+We will configure **KEEP App** to run as a **sub-application** of the default Windows IIS website. The main advantage here is that we'll be able to access **KEEP App** from the same hostname as the default website.
+
+#### <a id="IISPrerequisites">Prerequisites</a>
+1. [Windows IIS (Internet Information Services)](https://www.iis.net/) = 10.0
+2. [Common Gateway Interface (CGI) for IIS](https://docs.microsoft.com/en-us/iis/configuration/system.webserver/cgi)
+
+#### <a id="IISPrerequisiteInstallation">Prerequisite Installation</a>
+We'll begin by installing **Windows IIS** (Internet Information Services) with **CGI** enabled.
+1. Install Windows IIS (Internet Information Services) with CGI
+	1. Open **Control Panel**
+	2. In the **Control Panel** search box, type **windows features**
+	3. Under **Programs and Features**, click **Turn Windows features on or off**
+
+	![Programs and Features](Images/KEEPAppInstallation/ProgramsAndFeatures.jpg)
+
+	4. Check the box next to **Internet Information Services** and expand **World Wide Web Services** and **Application Development Features** menus. Check the box next to **CGI**
+
 	![Windows Features](Images/KEEPAppInstallation/WindowsFeatures.jpg)
-	
-	5. Navigate to http://localhost in a browser, you should see the default Windows IIS landing page
-		1. If you don't see the default page
-		2. Go back to Control Panel
-		3. In the search box type **services**
-		4. Under **Administrative Tools** click **View local services**
-		5. Scroll down the list of services until you find **World Wide Web Publishing Service**
-		6. Ensure this service is running, if not right click on it and select **Start**
-3. Configure FastCGI in IIS
-	1. From the Windows start menu, search for IIS Manager
-	2. From the menu on the left, select the server
 
-	![Select the Server](Images/KEEPAppInstallation/SelectServer.jpg)
-	
-	3. With the server still selected, double-click the **FastCGI Settings** icon in the middle area
-	4. In the menu on the right, click **Add Application...**
-	5. In the **Full Path:** box enter the path to the `python.exe` file **of the virtual environment for your Django project** located in `path/to/project/root/ENVName-env/Scripts/python.exe`
-	6. In the **Arugments:** box enter the path to the `wfastcgi.py` file **of the virtual environment for your Django project** located in `path/to/project/root/ENVName-env/Lib/site-packages/wfastcgi.py`
-	
+	5. Navigate to http://localhost/ in a browser. You should see the default Windows IIS landing page. **If you do not see the default landing page**
+		1. Open **Control Panel**
+		2. In the search box type **services**
+		3. Under **Administrative Tools** click **View local services**
+		4. Scroll down the list of services until you find **World Wide Web Publishing Service**
+		5. Ensure the service is running, if not right click and select **Start**
+
+#### <a id="">FastCGI Configuration</a>
+With the prerequisite installation complete, we can now configure the **FastCGI** settings required to serve Django through IIS. We'll do this by first creating our **FastCGI** application for **KEEP App** and then creating a **sub-application** with a proper **Handler** to process requests to **KEEP App's** Django backend.
+1. Create the FastCGI application
+	1. From the **Windows start menu**, search for **IIS Manager**
+	2. In **IIS Manager**, click the **FastCGI Settings** icon
+
+	![FastCGI](Images/KEEPAppInstallation/FastCGI.jpg)
+
+	3. In the right-side **Actions** menu, click **Add Application...**
+	4. In the **Full Path:** field, enter the path to the `python.exe` file of the **virtual environment** for **KEEP App**. For example: `path\to\KEEPApp\KEEPApp-env\Scripts\python.exe`
+	5. In the **Arugments:** field, enter the path to the `wfastcgi.py` file of the **virtual environment** for **KEEP App**. For example: `path\to\KEEPApp\KEEPApp-env\Lib\site-packages\wfastcgi.py`
+
 	![FastCGI Paths](Images/KEEPAppInstallation/FastCGIPaths.jpg)
-	
-	7. In the **FastCGI Properties:** section, click on **Environment Variables** and then click the "..." on the right to open the EnvironmentVariables Collection Editor
-	8. Click **Add**
-	9. In right section, change **Name** to **WSGI_HANDLER** in all caps (This must be exact)
-	10. In the right section, set **Value** to **django.core.wsgi.get_wsgi_application()** (This must be exact)
-	
-	![WSGI HANDLER](Images/KEEPAppInstallation/WsgiHandler.jpg)
-	
-	11. Click **Add** again
-	12. In the right section, change **Name** to **DJANGO_SETTINGS_MODULE** in all caps (This must be exact)
-	13. In the right section, set **Value** to **projectname.settings**, you will need to replace **projectname** with the name of your main Django project. You can check this by looking at the first couple of lines in the `settings.py` of the Django project
 
-	![Project Name](Images/KEEPAppInstallation/ProjectName.jpg)
-	
-	14. Your environment variables should now resemble the following:
-	
+	6. In the **FastCGI Properties:** section, click on **Environment Variables** and then click the <kbd>...</kbd> button on the right. This will open the **EnvironmentVariables Collection Editor**
+
+	![Environment Variables Collection Editor](Images/KEEPAppInstallation/EnvironmentVariablesCollectionEditor.jpg)
+
+	7. Click **Add**
+	8. In the right-side section, change **Name** to **WSGI_HANDLER**, exactly as shown
+	9. In the right-side section, change **Value** to **django.core.wsgi.get_wsgi_application()**, exactly as shown
+
+	![WSGI HANDLER](Images/KEEPAppInstallation/WsgiHandler.jpg)
+
+	10. Click **Add** again
+	11. In the right-side section, change **Name** to **DJANGO_SETTINGS_MODULE**, exactly as shown
+	12. In the right-side section, change **Value** to **keepapi.settings**, exactly as shown
+	> Note: If you named your Django project something else, you will need to replace `keepapi` with whatever name you chose.
+
 	![Django Settings Module](Images/KEEPAppInstallation/DjangoSettingsModule.jpg)
+
+	13. Click **OK** to close the **EnvironmentVariables Collection Editor**
+	14. Click **OK** again, to close the **Add FastCGI Application** screen
+	15. You should now see your new **FastCGI** application listed on the **FastCGI Settings** screen
+
+	![FastCGI List](Images/KEEPAppInstallation/FastCGIList.jpg)
+
+2. Add a sub-application to the default website
+	1. In the left-side **Connections** menu, expand the **server** and **Sites** folder
+	2. Right-click the **Default Web Site** and select **Add Application**
+
+	![Add Application](Images/KEEPAppInstallation/AddApplication.jpg)
 	
-	15. Click OK to close the EvironmentVariables Collection Editor and OK again to close the Add FastCGI Application screen
-4. Add a new site to IIS
-	1. In the left menu of IIS Manager, double-click on the server name to expand it
-	2. Right-click on the **Sites** folder and select **Add Website...**
-	3. In the **Site name:** box enter any name you would like
-	4. Click the "..." button next to **Physical path:** and navigate to the folder that contains the `manage.py` file of your Django project
-	5. For testing purposes, change **Port:** to something other than 80, for example 85
+	3. In the **Add Application** screen, enter `KEEPApp` as the **Alias**
+	4. In the **Physical path:** field, enter the path to the `src` folder located in the **root** directory we made during installation
+
+	![Add Application Settings](Images/KEEPAppInstallation/AddApplicationSettings.jpg)
+
+	5. Click **OK**, you should now see the new **sub-application** in the left-side **Connections** menu
+
+	![Connections Menu](Images/KEEPAppInstallation/ConnectionsMenu.jpg)
+
+3. Configure site handler mappings
+	1. Select the new **sub-application** you created in the previous step
+	2. Click the **Handler Mappings** icon
 	
-	![Add Website](Images/KEEPAppInstallation/AddWebsite.jpg)
-	
-	6. Click OK
-5. Configure site handler mappings
-	1. In the left menu of IIS Manager, double-click on the **Sites** folder to expand it
-	2. Click on the name of the site you just added
-	3. With the site selected, double-click the **Handler Mappings** icon in the middle area
-	4. In the right menu, click **Add Module Mapping...**
-	5. In **Request path:** enter `*`
-	6. In **Module:** select **FastCgiModule** (not CgiModule)
-	7. In **Executeable:** enter the path to the `python.exe` of your virtual environment, followed by a pipe ("|") symbol, immediately followed by the path to the `wfastcgi.py` file of your virtual environment. For example:
-	> Note: Having spaces in any part of your path is not supported
+	![Handler Mappings](Images/KEEPAppInstallation/HandlerMappings.jpg)
+
+	3. In the right-side **Actions** menu, click **Add Module Mapping...**
+	4. Enter `*` in the **Request path:** field
+	5. Select `FastCgiModule` in the **Module:** field
+	6. Enter the path to the `python.exe` of the **virtual environment**, followed by a pipe `|` symbol, immediately followed by the path to the `wfastcgi.py` file of the **virtual environment**. For example:
+	> Note: Having any spaces in any part of the path is not supported with this method
 	```
-	C:\path\to\ENVName-env\Scripts\python.exe|C:\path\to\ENVName-env\Lib\site-packages\wfastcgi.py
+	C:\path\to\KEEPApp\KEEPApp-env\Scripts\python.exe|C:\path\to\KEEPApp\KEEPApp-env\Lib\site-packages\wfastcgi.py
 	```
-	8. In **Name:** enter any name you would like, for example **Django Handler**
-	9. Your inputs should resemble the following:
+	7. Enter `Django Handler` in the **Name:** field
 
 	![Module Mapping](Images/KEEPAppInstallation/ModuleMapping.jpg)
+
+	8. Click **Request Restrictions**
+	9. Un-check the box next to **Invoke handler only if request is mapped to:**
+
+	![Request Restrictions](Images/KEEPAppInstallation/RequestRestrictions.jpg)
+
+	10. Click **OK** to close the **Request Restrictions** screen
+	11. Click **OK** to close the **Add Module Mapping** screen
+	12. Click **No** to the **Do you want to create a FastCGI application for this executable?** warning
+4. Configure folder permissions for IIS
+
 	
-	10. Click **Request Restrictions** and ensure **Invoke handler only if request is mapped to:** is un-checked
-	11. Click OK to close the **Request Restrictions** screen
-	12. Click OK to close the **Add Module Mapping** screen
-	13. Click No to the **Do you want to create a FastCGI application for this executable?** warning
+	
+	
+
+
 6. Configure folder permissions for IIS
 	1. Navigate to the root folder of the project (The folder that contains the src folder)
 	2. Right-click the root folder and select **Properties**
@@ -319,6 +363,12 @@ Quit the server with CTRL-BREAK.
 	14. You should now be able to access your Django application through http://localhost:85/model/ (replace 85 with whatever port you configured previously)
 	15. If everything is working, you can now move on to adding a custom hostname binding
 	> Note: KEEPApp has no static files, therefore static file configuration has been intentionally skipped
+
+
+
+#### <a id="">Django Configuration</a>
+
+
 7. Adding a hostname binding
 	> Note: Proper DNS configuration is required to properly serve websites with custom hostname bindings. We will be faking this by manually configuring our local hosts file. This will only work if we are accessing the site from the same machine it is being hosted on, proper DNS configuration will not be covered in this guide
 	1. Return to IIS Manager
