@@ -332,41 +332,51 @@ With the prerequisite installation complete, we can now configure the **FastCGI*
 	11. Click **OK** to close the **Add Module Mapping** screen
 	12. Click **No** to the **Do you want to create a FastCGI application for this executable?** warning
 4. Configure folder permissions for IIS
-
-	
-	
-	
-
-
-6. Configure folder permissions for IIS
-	1. Navigate to the root folder of the project (The folder that contains the src folder)
-	2. Right-click the root folder and select **Properties**
+	1. Navigate to the **root** folder of the **KEEP App** project
+	2. Right-click the **root** folder and select **Properties**
 	3. Click the **Security** tab
-	4. Under **Group or user names:**, click **Edit**
-	5. In the new window, click **Add**
-	6. Click **Locations** next to **From this location:**
-	7. Click the top item in the list, and click OK
-	8. In the **Enter the object names to select:** area, type **IUSR; IIS_IUSRS** exactly as shown
-	9. Click Check Names
 
-	![Permissions](Images/KEEPAppInstallation/Permissions.jpg)
+	![Security Tab](Images/KEEPAppInstallation/SecurityTab.jpg)
 	
-	10. Click OK
-	11. Click OK again
-	12. **OPTIONAL** If your project resides somewhere on the file system where higher-level permissions are likely to overwrite the permissions you just configured, you can disable inheritance
-		1. From the **Security** tab, click **Advanced**
-		2. Near the bottom of the new window, click **Disable inheritance**
-		3. Click **Convert inherited permissions into explicit permissions on this object**
-		4. Click OK
-	13. Click OK to close the properties screen
-	> Note: We have only added Read and Execute permissions. For certain projects, it may be necessary to add Write and Modify permissions to IUSR and IIS_USRS as well
-	14. You should now be able to access your Django application through http://localhost:85/model/ (replace 85 with whatever port you configured previously)
-	15. If everything is working, you can now move on to adding a custom hostname binding
-	> Note: KEEPApp has no static files, therefore static file configuration has been intentionally skipped
+	4. Under the **Group or user names:** section, check for **IUSR** and **IIS_USRS**, **If IUSR and IIS_IUSRS do not exist** performing the following steps:
+		1. Under **Group or user names:** section, click **Edit...**
+
+		![Group or user names](Images/KEEPAppInstallation/GroupOrUserNames.jpg)
+
+		2. Under **Group or user names:** in the new window, click **Add...**
+		3. In the **Select Users or Groups** screen, click **Locations...** and select the first item in the list
+
+		![Locations](Images/KEEPAppInstallation/Locations.jpg)
+
+		4. Click **OK** to close the **Locations** screen
+		5. Enter `IUSR; IIS_IUSRS` in the **Enter the object names to select:** field and click **Check Names**
+
+		![Check Names](Images/KEEPAppInstallation/CheckNames.jpg)
+
+		6. Click **OK** to close the **Select Users or Groups** screen
+		7. Click **OK** again, to close the **Permissions** screen
+		8. You should now see **IUSR** and **IIS_IUSRS** listed in the **Security** tab of the **Properties** screen
+		9. **OPTIONAL** If your **root** directory resides somewhere on the file system where higher-level permissions are likely to overwrite the permissions we just configured, for example, in a user's home directory, you can disable inheritance.
+			1. From the **Security** tab of the **Properties** screen, click **Advanced**
+			2. In the **Advanced Security Settings** screen, click **Disable inheritance**
+
+			![Advanced Security](Images/KEEPAppInstallation/AdvancedSecurity.jpg)
+
+			3. Click **Convert inherited permissions into explicit permissions on this object** on the **Block Inheritance** warning
+	
+			![Block Inheritance](Images/KEEPAppInstallation/BlockInheritance.jpg)
+
+			4. Click **OK** to close the **Advanced Security Settings** screen
+			5. 
+	5. Click **OK** to close the **Properties** screen
+	> Note: We have only added **Read** and **Execute** permissions. For certain Django projects, it may be necessary to add **Write** and **Modify** permissions to **IUSR** and **IIS_IUSRS** as well
+	6. You should now be able to access **KEEP App** through IIS at http://localhost/keepapp/ in your browser. Replace `/keepapp/` with whatever you chose as an **Alias** during the creation of the **sub-application**
+	7. If you would like to configure **KEEP App** to be accessible from a **custom hostname** instead of just **localhost**, continue on to the [Django Hostname Configuration](#DjangoHostnameConfiguration) section
+	> Note: KEEP App has no static files, therefore static file configuration has been intentionally skipped
 
 
 
-#### <a id="">Django Configuration</a>
+#### <a id="DjangoHostnameConfiguration">Django Hostname Configuration</a>
 
 
 7. Adding a hostname binding
