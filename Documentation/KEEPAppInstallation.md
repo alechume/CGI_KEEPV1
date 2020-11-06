@@ -7,7 +7,13 @@
 5. [Installation From Scratch](#InstallFromScratch)
 7. [Creating the Django Application](#CreateDjangoApp)
 8. [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
+	1. [Prerequisites](#IISPrerequisites)
+	2. [Prerequisite Installation](#IISPrerequisiteInstallation)
+	3. [FastCGI Configuration](#FastCGIConfiguration)
+	4. [Django Hostname Configuration](#DjangoHostnameConfiguration)
 9. [Connecting KEEPApp to Jira](#ConnectKEEPAppJira)
+	1.	[Prerequisites](#IISPrerequisites)
+	2.	[Connect the Django Backend](#ConnectDjangoBackend)
 
 ### <a id="Introduction">Introduction</a>
 Below you will find the instructions on the installation of the Django backend application that comprises **KEEP App**. For the purpose of this tutorial all software and package prerequisites will be listed, and it will be assumed you are using the same versions. You may attempt installation using differing versions, but results may vary.
@@ -34,7 +40,7 @@ For many of the installation steps you should be familiar with using a command s
 ### <a id="PrerequisiteInstallation">Prerequisite Installation</a>
 Please refer to the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md) guide for details.
 
-### Build The Directory Structure
+### <a id="DirectoryStructure">Build The Directory Structure</a>
 **KEEP App's** directory structure will consist of a single **root** directory to act as a container, and 2 sub-directories, 1 containing the python virtual environment and 1 containing the Django folders and files.
 1. Begin with the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md)
 2. Create a folder named `KEEPApp` that will act as our **root** directory
@@ -253,7 +259,7 @@ We'll begin by installing **Windows IIS** (Internet Information Services) with *
 		4. Scroll down the list of services until you find **World Wide Web Publishing Service**
 		5. Ensure the service is running, if not right click and select **Start**
 
-#### <a id="">FastCGI Configuration</a>
+#### <a id="FastCGIConfiguration">FastCGI Configuration</a>
 With the prerequisite installation complete, we can now configure the **FastCGI** settings required to serve Django through IIS. We'll do this by first creating our **FastCGI** application for **KEEP App** and then creating a **sub-application** with a proper **Handler** to process requests to **KEEP App's** Django backend.
 1. Create the FastCGI application
 	1. From the **Windows start menu**, search for **IIS Manager**
@@ -369,52 +375,57 @@ With the prerequisite installation complete, we can now configure the **FastCGI*
 			4. Click **OK** to close the **Advanced Security Settings** screen
 	5. Click **OK** to close the **Properties** screen
 	> Note: We have only added **Read** and **Execute** permissions. For certain Django projects, it may be necessary to add **Write** and **Modify** permissions to **IUSR** and **IIS_IUSRS** as well
-	6. You should now be able to access **KEEP App** through IIS at http://localhost/keepapp/ in your browser. Replace `/keepapp/` with whatever you chose as an **Alias** during the creation of the **sub-application**
+	6. You should now be able to access **KEEP App** through IIS at http://localhost/keepapp/model/ in your browser. Replace `/keepapp/` with whatever you chose as an **Alias** during the creation of the **sub-application**
 	7. If you would like to configure **KEEP App** to be accessible from a **custom hostname** instead of just **localhost**, continue on to the [Django Hostname Configuration](#DjangoHostnameConfiguration) section
 	> Note: KEEP App has no static files, therefore static file configuration has been intentionally skipped
-
-
+	8. If you do not need **KEEP App** to be accessible from a **custom hostname** you can move on to [Connecting KEEPApp to Jira](#ConnectKEEPAppJira)
 
 #### <a id="DjangoHostnameConfiguration">Django Hostname Configuration</a>
-TO DO
+Django includes a security feature that only allows it to be accessed from certain **allowed hosts**. **Localhost** is included by default **so long as nothing else is specified**. If your **default IIS website** has a custom hostname binding, we can add that hostname to our Django `settings.py` to allow it to be used. For the purpose of this example we will be using `www.myexamplehostname.com` as our custom hostname, you would need to substitute this for your specific hostname.
+1. Open the `settings.py` file of your main Django project in your favorite text editor. This file is located in the `root\src\project` folder. For example, `KEEPApp\src\keepapi`
+2. Modify the `ALLOWED_HOSTS` section to include your custom hostname
+> Note: If you would like to retain the ability to access the Django backend via **localhost**, you must also explicitly include `localhost` in the `ALLOWED_HOSTS` as well
 
-7. Adding a hostname binding
-	> Note: Proper DNS configuration is required to properly serve websites with custom hostname bindings. We will be faking this by manually configuring our local hosts file. This will only work if we are accessing the site from the same machine it is being hosted on, proper DNS configuration will not be covered in this guide
-	1. Return to IIS Manager
-	2. Expand your server and the Sites folder
-	3. Right-click on your website in the left menu
-	4. Select **Edit Bindings**
-	5. Click on the first binding in the list and Click **Edit** on the right side
-	6. In the **Port:** box, enter 80
-	7. In the **Host name:** box, enter your custom hostname
-	
-	![Hostname Binding](Images/KEEPAppInstallation/HostnameBinding.jpg)
-	
-	8. Click OK
-	9. Click Close
-	10. Click your website in the left menu of IIS Manager and then Click **Restart** in the right menu
-	11. In the right menu under **Browse Website** you should now see the hostname you just configured
-	
-	![Browse Website](Images/KEEPAppInstallation/BrowseWebsite.jpg)
-	
-	12. Open the `settings.py` file of your Django project in your favorite text editor
-	13. Modify `ALLOWED_HOSTS` to include your custom hostname
-	
-	![Allowed Hosts](Images/KEEPAppInstallation/AllowedHosts.jpg)
-	
-	14. If your DNS is already configured, you're done. Otherwise, we will modify our local hosts file, this should only ever be used for testing purposes
-		1. From the windows start menu, search for **Notepad**
-		2. Right-click **Notepad** and select **Run as Administrator**
-		3. In Notepad, click **File > Open**
-		4. Ensure **All Files** is select as the **file-type**
-		5. Navigate to your local hosts file, usually located at `C:\Windows\System32\drivers\etc`
-		6. Open the file named **hosts**
-		7. Scroll to the bottom of the file and add a new entry for your custom hostname
-		
-		![Hosts](Images/KEEPAppInstallation/Hosts.jpg)
-		
-		8. Save the hosts file
-	15. You should now be able to access your Django project from your custom hostname. Example: `alec.keepapi.com/model/`
-	16. You can now move on to [Connecting KEEPApp to Jira](#ConnectKEEPAppJira)
+![Allowed Hosts](Images/KEEPAppInstallation/AllowedHosts.jpg)
+
+3. You should now be able to access **KEEP App** through IIS at http://www.myexamplehostname.com/keepapp/model/ or http://localhost/keepapp/model/ in your browser. Replace `/keepapp/` with whatever you chose as an **Alias** during the creation of the **sub-application**
+> Note: This guide does not including DNS configuration. It is assumed that if you are using a custom hostname for your default IIS website, you have already configured your DNS properly
+4. The last step is to connect the **Jira custom plugin** to our Django backend. Refer to the [Connecting KEEPApp to Jira](#ConnectKEEPAppJira) section for details.
 
 ### <a id="ConnectKEEPAppJira">Connecting KEEPApp to Jira</a>
+**KEEP App** works by making predictions on the quality of **Jira issues**. A custom plugin has been developed that will automatically detect when a **Jira issue** is created and send the required data to the **KEEP App** Django backend. The Django backend returns a response with the predicted quality and the Jira plugin displays that information on the **Jira issue**.
+
+#### <a id="IISPrerequisites">Prerequisites</a>
+1. A Jira instance to connect to
+2. The custom Jira plugin for KEEP is already installed
+3. The hostname/url of the Django backend instance
+
+#### <a id="ConnectDjangoBackend">Connect the Django Backend</a>
+1. Log in to **Jira**
+2. Navigate to the **Add-ons Marketplace**
+
+![Jira Addons](Images/KEEPAppInstallation/JiraAddons.jpg)
+
+3. In the left-side menu, click **Manage apps**
+
+![Manage Apps](Images/KEEPAppInstallation/ManageApps.jpg)
+
+4. Scroll down the list of **User-installed apps** until you find **Knowledge Enhancement and Evaluation Project**
+
+![User Installed Apps](Images/KEEPAppInstallation/UserInstalledApps.jpg)
+
+5. Expand **Knowledge Enhancement and Evaluation Project** and click on the **modules list** to see the enabled/disabled modules. Ensure the **Quality Servlet** module is disabled
+
+![Quality Servlet](Images/KEEPAppInstallation/QualityServlet.jpg)
+
+6. Click **Configure**
+
+![Configure Button](Images/KEEPAppInstallation/ConfigureButton.jpg)
+
+7. Enter the address of the Django backend server in the **Assessment URL** field and click **Save**
+
+![Assessment URL](Images/KEEPAppInstallation/AssessmentURL.jpg)
+
+8. To test functionality, modify the **Description** field of a **Jira issue**. You should see an indication of the quality shown below the **Description** field
+
+![Test Functionality](Images/KEEPAppInstallation/TestFunctionality.jpg)
