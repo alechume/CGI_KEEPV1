@@ -12,7 +12,7 @@
 	3. [FastCGI Configuration](#FastCGIConfiguration)
 	4. [Django Hostname Configuration](#DjangoHostnameConfiguration)
 9. [Connecting KEEPApp to Jira](#ConnectKEEPAppJira)
-	1.	[Prerequisites](#IISPrerequisites)
+	1.	[Prerequisites](#JiraPrerequisites)
 	2.	[Connect the Django Backend](#ConnectDjangoBackend)
 
 ### <a id="Introduction">Introduction</a>
@@ -395,7 +395,7 @@ Django includes a security feature that only allows it to be accessed from certa
 ### <a id="ConnectKEEPAppJira">Connecting KEEPApp to Jira</a>
 **KEEP App** works by making predictions on the quality of **Jira issues**. A custom plugin has been developed that will automatically detect when a **Jira issue** is created and send the required data to the **KEEP App** Django backend. The Django backend returns a response with the predicted quality and the Jira plugin displays that information on the **Jira issue**.
 
-#### <a id="IISPrerequisites">Prerequisites</a>
+#### <a id="JiraPrerequisites">Prerequisites</a>
 1. A Jira instance to connect to
 2. The custom Jira plugin for KEEP is already installed
 3. The hostname/url of the Django backend instance
