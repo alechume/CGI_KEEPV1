@@ -4,7 +4,8 @@
 2. [Software Prerequisites](#SoftwarePrerequisites)
 3. [Package Versions](#PackageVersions)
 4. [Prerequisite Installation](#PrerequisiteInstallation)
-5. [Installation From Scratch](#InstallFromScratch)
+5. [Build the Directory Structure](#DirectoryStructure)
+6. [Installation From Scratch](#InstallFromScratch)
 7. [Creating the Django Application](#CreateDjangoApp)
 8. [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
 	1. [Prerequisites](#IISPrerequisites)
@@ -34,13 +35,13 @@ For many of the installation steps you should be familiar with using a command s
 2. [TorchVision](https://pytorch.org/get-started/locally/) = 0.7.0 (Package of commonly used datasets, model architectures and image transformations for computer vision)
 3. [Fastai](https://fastai1.fast.ai/install.html) = 1.0.61 (Simplified API for Pytorch)
 4. [SpaCy](https://spacy.io/) = 2.3.2 (Natural language processing software library)
-5. [Django](https://www.djangoproject.com/) = 2.1.10 (Django web framework used for handling prediction requests and returning results)
+5. [Django](https://www.djangoproject.com/) = 2.1.10 (Python web framework)
 6. [Wfastcgi](https://pypi.org/project/wfastcgi/) = 3.0.0 (Allows python applications to be hosted via Windows IIS)
 
 ### <a id="PrerequisiteInstallation">Prerequisite Installation</a>
 Please refer to the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md) guide for details.
 
-### <a id="DirectoryStructure">Build The Directory Structure</a>
+### <a id="DirectoryStructure">Build the Directory Structure</a>
 **KEEP App's** directory structure will consist of a single **root** directory to act as a container, and 2 sub-directories, 1 containing the python virtual environment and 1 containing the Django folders and files.
 1. Begin with the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md)
 2. Create a folder named `KEEPApp` that will act as our **root** directory
@@ -52,7 +53,7 @@ Please refer to the [Prerequisite Installation](https://github.com/alechume/CGI_
 ```
 virtualenv KEEPApp-env (You may replace KEEPApp-env with anything you'd like)
 ```
-6. Your directory structure should now match the following:
+6. Your directory structure should now resemble the following:
 ```
 └── KEEPApp            # Root directory
     ├── KEEPApp-env    # Virtual python environment
@@ -76,7 +77,7 @@ The output in your shell should now be prefaced with the environment name in bra
 python -m pip install --upgrade pip
 ```
 4. Now we are ready to begin installing our required packages. First we'll install Pytorch
-> In general, it is best to install the same version of Pytorch that was used to train the model. If you are unsure which version was used, you will either need to find out, or attempt to install and correct version through trial and error. Please refer to the [Pytorch Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PytorchInstallation.md) guide for details.
+> In general, it is best to install the same version of Pytorch that was used to train the model. If you are unsure which version was used, you will either need to find out, or attempt to install and correct version through trial and error. Please refer to the [Pytorch Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PytorchInstallation.md) guide for details on how to install Pytorch.
 5. Verify Pytorch installation by first entering a Python shell using the following command
 ```
 python
@@ -138,7 +139,7 @@ django-admin startproject keepapi src (You may replace keepapi with anything you
 ```
 cd src
 ```
-5. Most Django applications are broken up into smaller chunks called **Apps**, we will use the same principle with KEEP by creating a **keep** app without our Django project. We can do this with the following command
+5. Most Django applications are broken up into smaller chunks called **Apps**, we will use the same principle with KEEP by creating a **keep** app within our Django project. We can do this with the following command
 ```
 django-admin startapp keep (You may replace keep with anything you'd like)
 ```
@@ -257,7 +258,7 @@ We'll begin by installing **Windows IIS** (Internet Information Services) with *
 		2. In the search box type **services**
 		3. Under **Administrative Tools** click **View local services**
 		4. Scroll down the list of services until you find **World Wide Web Publishing Service**
-		5. Ensure the service is running, if not right click and select **Start**
+		5. Ensure the service is running, if not right-click and select **Start**
 
 #### <a id="FastCGIConfiguration">FastCGI Configuration</a>
 With the prerequisite installation complete, we can now configure the **FastCGI** settings required to serve Django through IIS. We'll do this by first creating our **FastCGI** application for **KEEP App** and then creating a **sub-application** with a proper **Handler** to process requests to **KEEP App's** Django backend.
@@ -330,7 +331,7 @@ With the prerequisite installation complete, we can now configure the **FastCGI*
 	![Module Mapping](Images/KEEPAppInstallation/ModuleMapping.jpg)
 
 	8. Click **Request Restrictions**
-	9. Un-check the box next to **Invoke handler only if request is mapped to:**
+	9. **Un-check** the box next to **Invoke handler only if request is mapped to:**
 
 	![Request Restrictions](Images/KEEPAppInstallation/RequestRestrictions.jpg)
 
@@ -344,7 +345,7 @@ With the prerequisite installation complete, we can now configure the **FastCGI*
 
 	![Security Tab](Images/KEEPAppInstallation/SecurityTab.jpg)
 	
-	4. Under the **Group or user names:** section, check for **IUSR** and **IIS_USRS**, **If IUSR and IIS_IUSRS do not exist** performing the following steps:
+	4. Under the **Group or user names:** section, check for **IUSR** and **IIS_USRS**. **If IUSR and IIS_IUSRS do not exist** performing the following steps:
 		1. Under **Group or user names:** section, click **Edit...**
 
 		![Group or user names](Images/KEEPAppInstallation/GroupOrUserNames.jpg)
@@ -393,7 +394,7 @@ Django includes a security feature that only allows it to be accessed from certa
 4. The last step is to connect the **Jira custom plugin** to our Django backend. Refer to the [Connecting KEEPApp to Jira](#ConnectKEEPAppJira) section for details.
 
 ### <a id="ConnectKEEPAppJira">Connecting KEEPApp to Jira</a>
-**KEEP App** works by making predictions on the quality of **Jira issues**. A custom plugin has been developed that will automatically detect when a **Jira issue** is created and send the required data to the **KEEP App** Django backend. The Django backend returns a response with the predicted quality and the Jira plugin displays that information on the **Jira issue**.
+**KEEP App** works by making predictions on the quality of **Jira issues**. A custom plugin has been developed that will automatically detect when a **Jira issue** is created or updated and send the required data to the **KEEP App** Django backend. The Django backend returns a response with the predicted quality and the Jira plugin displays that information on the **Jira issue**.
 
 #### <a id="JiraPrerequisites">Prerequisites</a>
 1. A Jira instance to connect to
