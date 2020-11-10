@@ -4,7 +4,7 @@
 2. [Software Prerequisites](#SoftwarePrerequisites)
 3. [Package Versions](#PackageVersions)
 4. [Prerequisite Installation](#PrerequisiteInstallation)
-5. [Building The Directory Structure](#DirectoryStructure)
+5. [Building the Directory Structure](#DirectoryStructure)
 6. [Installation From Scratch](#InstallFromScratch)
 7. [Jupyter Configuration](#JupyterConfiguration)
 
@@ -35,7 +35,7 @@ For many of the installation steps you should be familiar with using a command s
 ### <a id="PrerequisiteInstallation">Prerequisite Installation</a>
 Please refer to the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md) guide for details.
 
-### <a id="DirectoryStructure">Building The Directory Structure</a>
+### <a id="DirectoryStructure">Building the Directory Structure</a>
 **KEEP Training's** directory structure will consist of a single **root** directory to act as a container, and 2 sub-directories, 1 containing the python virtual environment and 1 containing the Jupyter Notebook `.ipynb` folders and files.
 1. Begin with the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md)
 2. Create a folder named `KEEPTraining` that will act as our **root** directory
@@ -43,7 +43,7 @@ Please refer to the [Prerequisite Installation](https://github.com/alechume/CGI_
 4. Open your **command shell** and navigate to the inside of the **root** directory in your shell
 > Note: Ensure your shell is running in administrator mode or equivalent
 5. Create a `virtual python environment` to contain Python dependancies using the following command
-> Note: A `virtual python environment` allows us to keep all our installed packages and dependancies local to the project we're working on, effectively allowing us to install different versions of packages for different projects without interference.
+> Note: A `virtual python environment` allows us to keep all of our installed packages and dependancies local to the project we're working on, effectively allowing us to install different versions of packages for different projects without interference.
 ```
 virtualenv KEEPTraining-env (You may replace KEEPTraining-env with anything you'd like)
 ```
@@ -128,13 +128,17 @@ pip install jupyter==1.0.0
 ```
 jupyter notebook password
 ```
-13. Start the Jupyter server and log in with the password you created to verify installation
+13. Navigate to the inside of the **Notebooks** folder located in the **root** of the **KEEP Training** project
+```
+cd Notebooks
+```
+14. Start the Jupyter server and log in with the password you created to verify installation
 ```
 jupyter notebook
 ```
 After running this command you should be redirected to a browser window automatically displaying the main Jupyter homepage.
 
-14. **KEEP Training** is now successfully installed. In the next section we will cover some **optional** configuration settings for the Jupyter server. If you would rather skip the **optional** configuration, you may now refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md) for how to create and run notebooks in Jupyter
+15. **KEEP Training** is now successfully installed. In the next section we will cover some **optional** configuration settings for the Jupyter server. If you would rather skip the **optional** configuration, you may now refer to the [KEEP Training Operation Manual](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingOperationManual.md) for how to create and run notebooks in Jupyter
 
 ### <a id="JupyterConfiguration">Jupyter Configuration</a>
 In this section we will cover some basic Jupyter server configuration settings. All of the settings mentioned are **optional** and only provide quality-of-life improvements. First we will cover how to generate the configuration file, and then go over some of the options you may want to modify.
@@ -172,7 +176,7 @@ In this section we will cover some basic Jupyter server configuration settings. 
 		<dd>By default Jupyter allows the use of in-browser terminals. This setting simply disables that functionality, this does not make the server more secure, since everything that could otherwise be done in a terminal can be done in a notebook.</dd>
 	</dl>
 
-	For more detailed information about Jupyter configuration settings, refer to the [official documentation](https://jupyter-notebook.readthedocs.io/en/stable/config.html)
+	For more configuration options and a more detailed explanation of the above mentioned options, refer to the [official documentation](https://jupyter-notebook.readthedocs.io/en/stable/config.html)
 
 	7. Return to your **command shell** and navigate to the inside of the **Notebooks** folder located in the **root** of the **KEEP Training** project
 	```
