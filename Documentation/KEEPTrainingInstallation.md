@@ -152,7 +152,7 @@ In this section we will cover some basic Jupyter server configuration settings. 
 	```
 	jupyter notebook --generate-config
 	```
-	4. Once Jupyter has finished generating the configuration it will display the location where it has been stored, navigate to this location and open the **jupyter_notebook_config.py** file
+	4. Once Jupyter has finished generating the configuration it will display the location where it has been stored, navigate to this location and open the **jupyter_notebook_config.py** file in a text editor
 	> Note: If you created a password during installation, this folder will also contain a jupyter_notebook_config.json file. This file stores the hashed password and should not be confused with the main config file which ends with `.py`
 	5. Next we will find and modify several configuration settings. For each setting you will need to **un-comment** the line first, before making changes. **Hint: using the search function of your text editor will make finding the configuration settings much easier**
 	6. Find each setting listed under the **Setting** heading of the following table and change the argument to match whatever is under the **Arugment** heading.
