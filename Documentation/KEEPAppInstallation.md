@@ -207,8 +207,8 @@ from django.urls import path
 from django.conf.urls import include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('model/', include('keep.urls')), # Replace keep with your specific app name (if you chose something different)
+    path('keepapp/admin/', admin.site.urls),
+    path('keepapp/model/', include('keep.urls')), # Replace keep with your specific app name (if you chose something different)
 ]
 ```
 14. Ensure all files have been saved
@@ -227,7 +227,7 @@ Django version 2.1.10, using settings 'keepapi.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 ```
-17. Navigate to `http://127.0.0.1:8000/model/` you should be presented with a `405 error`. This indicates that you have successfully reached the django view, but since the view only accepts POST requests there is nothing to actually display.
+17. Navigate to http://127.0.0.1:8000/keepapp/model/ you should be presented with a `405 error`. This indicates that you have successfully reached the django view, but since the view only accepts POST requests there is nothing to actually display.
 
 ![405 Error](Images/KEEPAppInstallation/405Error.jpg)
 
