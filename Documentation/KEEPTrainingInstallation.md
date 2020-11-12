@@ -9,7 +9,7 @@
 7. [Jupyter Configuration](#JupyterConfiguration)
 
 ### <a id="Introduction">Introduction</a>
-Below you will find the instructions on the installation of the Jupyter Notebook application responsible for training the neural network model used within KEEP. For the purpose of this tutorial all software and package prerequisites will be listed, and it will be assumed you are using the same versions. You may attempt installation using differing versions, but results may vary.
+Below you will find the instructions on the installation of the Jupyter Notebook application responsible for training the neural network model used by **KEEP App**. For the purpose of this tutorial, all software and package prerequisites will be listed, and it will be assumed you are using the same versions. You may attempt installation using differing versions, but results may vary.
 
 It will also be assumed you are using the same directory structure for the project as described below. You may attempt to use a different directory structure, but you will need to be able to modify file-paths accordingly.
 
@@ -57,7 +57,7 @@ virtualenv KEEPTraining-env (You may replace KEEPTraining-env with anything you'
 
 ### <a id="InstallFromScratch">Installation From Scratch</a>
 1. Open your **command shell** and navigate to the inside of the **root** directory
-2. Activate the virtual environment you created in order to start installing the required packages
+2. Activate the **virtual environment** you created in order to start installing the required packages
 > Note: You will need to activate this virtual environment every time you want to work with this project, you can deactivate the environment when finished with the `deactivate` command
 ```
 .\KEEPTraining-env\Scripts\activate
@@ -71,7 +71,7 @@ The output in your shell should now be prefaced with the environment name in bra
 python -m pip install --upgrade pip
 ```
 4. Now we are ready to begin installing our required packages. First we'll install Pytorch
-> Please refer to the [Pytorch Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PytorchInstallation.md) guide for details.
+> Please refer to the [Pytorch Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PytorchInstallation.md) guide for details
 5. Verify Pytorch installation by first entering a Python shell using the following command
 ```
 python
@@ -148,7 +148,7 @@ In this section we will cover some basic Jupyter server configuration settings. 
 	```
 	.\KEEPTraining-env\Scripts\activate
 	```
-	3. Generate the jupyter configuration file using the following command
+	3. Generate the Jupyter configuration file using the following command
 	```
 	jupyter notebook --generate-config
 	```
@@ -169,7 +169,7 @@ In this section we will cover some basic Jupyter server configuration settings. 
 		<dt>c.NotebookApp.notebook_dir</dt>
 		<dd>Specifies the full path to the main startup directory for the Jupyter application. This should be set to our Notebook directory we created during installation, located within the root of the KEEP Training project. For example "C:\\Users\\alec.hume\\Documents\\GitHub\\CGI_KEEPV1\\KEEPTraining\\Notebooks". </dd>
 		<dt>c.NotebookApp.open_browser</dt>
-		<dd>Specifies whether or not to open a browser automatically when the server first starts. Since we intend to serve our Jupyter application remotely and not locally, this is not necessary.</dd>
+		<dd>Specifies whether or not to open a browser automatically when the server first starts.</dd>
 		<dt>c.NotebookApp.quit_button</dt>
 		<dd>Allows us to enable or disable the Quit button on the Jupyter browser UI. If left enabled, a user could shut the Jupyter server down remotely from the UI.</dd>
 		<dt>c.NotebookApp.terminals_enabled</dt>

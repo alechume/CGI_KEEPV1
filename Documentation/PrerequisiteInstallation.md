@@ -6,7 +6,7 @@
 
 	![Include Pip](Images/PrerequisiteInstallation/IncludePip.jpg)
 
-	4. Check the box to **install for all users** and **Add Python to environment variables**
+	4. Check the box to **Install for all users** and **Add Python to environment variables**
 
 	![Install All Users](Images/PrerequisiteInstallation/InstallAllUsers.jpg)
 

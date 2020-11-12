@@ -4,7 +4,7 @@
 2. [Software Prerequisites](#SoftwarePrerequisites)
 3. [Package Versions](#PackageVersions)
 4. [Prerequisite Installation](#PrerequisiteInstallation)
-5. [Build the Directory Structure](#DirectoryStructure)
+5. [Building the Directory Structure](#DirectoryStructure)
 6. [Installation From Scratch](#InstallFromScratch)
 7. [Creating the Django Application](#CreateDjangoApp)
 8. [Hosting KEEP App on IIS](#HostingKEEPAppIIS)
@@ -21,7 +21,7 @@ Below you will find the instructions on the installation of the Django backend a
 
 It will also be assumed you are using the same directory structure for the project as described below. You may attempt to use a different directory structure, but you will need to be able to modify file-paths accordingly.
 
-**KEEP App** makes use of a **text classification neural network model** called `KEEPModel.pkl` trained using **KEEP Training**. The installation of **KEEP Training** is **not** necessarily required, but the KEEP text classification model **is** required.
+**KEEP App** makes use of a **text classification neural network model** called `KEEPModel.pkl` trained using **KEEP Training**. The installation of **KEEP Training** is **not** necessarily required, but the `KEEPModel.pkl` text classification model **is** required.
 
 For many of the installation steps you should be familiar with using a command shell (cmd prompt, PowerShell, Bash or equivalent), it will also be helpful to be familiar with Django and its file structure, though not required.
 
@@ -39,17 +39,17 @@ For many of the installation steps you should be familiar with using a command s
 6. [Wfastcgi](https://pypi.org/project/wfastcgi/) = 3.0.0 (Allows python applications to be hosted via Windows IIS)
 
 ### <a id="PrerequisiteInstallation">Prerequisite Installation</a>
-Please refer to the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md) guide for details.
+Please refer to the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md) guide for details
 
-### <a id="DirectoryStructure">Build the Directory Structure</a>
+### <a id="DirectoryStructure">Building the Directory Structure</a>
 **KEEP App's** directory structure will consist of a single **root** directory to act as a container, and 2 sub-directories, 1 containing the python virtual environment and 1 containing the Django folders and files.
 1. Begin with the [Prerequisite Installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/PrerequisiteInstallation.md)
 2. Create a folder named `KEEPApp` that will act as our **root** directory
 3. Inside the **root** directory, create a new folder named `src`, this will eventually contain our Django folders and files
-4. Open you **command shell** and navigate to the inside of the **root** directory in your shell
+4. Open your **command shell** and navigate to the inside of the **root** directory in your shell
 > Note: Ensure your shell is running in administrator mode or equivalent
 5. Create a `virtual python environment` to contain Python dependancies using the following command
-> Note: A `virtual python environment` allows us to keep all our installed packages and dependancies local to the project we're working on, effectively allowing us to install different versions of packages for different projects without interference.
+> Note: A `virtual python environment` allows us to keep all our installed packages and dependancies local to the project we're working on, effectively allowing us to install different versions of packages for different projects without interference
 ```
 virtualenv KEEPApp-env (You may replace KEEPApp-env with anything you'd like)
 ```
@@ -68,7 +68,7 @@ virtualenv KEEPApp-env (You may replace KEEPApp-env with anything you'd like)
 ```
 .\KEEPApp-env\Scripts\activate
 ```
-The output in your shell should now be prefaced with the environment name in brackets:
+The output in your shell should now be prefaced with the environment name in brackets
 ```
 (KEEPApp-env) C:\Some\path>
 ```

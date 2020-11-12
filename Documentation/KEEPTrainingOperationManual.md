@@ -12,7 +12,7 @@
 ### <a id="Introduction">Introduction</a>
 Below you will find instructions on the basic operation of **KEEP Training**. This is **NOT** the place to find an in-depth explanation of machine learning concepts, or how to correctly build custom neural network models. This manual is only meant to address the basic operation of **KEEP Training** to get you started.
 
-Jupyter is a software package that allows developers to both write code and see their results on the same page. In our case it allows us to write and run `Python` code to train our models and combine it with `Markdown`, a type of light-weight text formatting language. Through Jupyter we can write the code required to train our model and see a visual representation of the output in real time. Training neural network models is complex and requires experimentation, Jupyter allows us to keep everything in one place.
+Jupyter is a software package that allows developers to both write code and see their results on the same page. In our case it allows us to write and run `Python` code to train our models and combine it with `Markdown`, a type of light-weight text formatting language. Through Jupyter we can write the code required to train our model and see a visual representation of the output in real time. Training neural network models is complex, and requires experimentation, Jupyter allows us to keep everything in one place.
 
 ### <a id="EnvironmentPrerequisites">Environment Prerequisites</a>
 1. Complete the [KEEP Training installation](https://github.com/alechume/CGI_KEEPV1/blob/main/Documentation/KEEPTrainingInstallation.md) guide
@@ -24,11 +24,11 @@ Jupyter is a software package that allows developers to both write code and see 
 ![New Notebook](Images/KEEPTrainingOperationManual/NewNotebook.jpg)
 
 2. Type `print('Hello World!')` in the first line (known as a `cell`) of the newly created `Python 3` notebook
-3. With the first `cell` highlighted, press <kbd>Shift</kbd> + <kbd>Enter</kbd> or click the <kbd>Run</kbd> button at the top of the page
+3. With the first `cell` high-lighted, press <kbd>Shift</kbd> + <kbd>Enter</kbd> or click the <kbd>Run</kbd> button at the top of the page
 
 ![First Cell](Images/KEEPTrainingOperationManual/FirstCell.jpg)
 
-4. In the second line of the notebook type `# This is a title!` and with the `cell` still highlighted, select `Markdown` from the **dropdown menu** near the top of the page
+4. In the second line of the notebook type `# This is a title!` and with the `cell` still high-lighted, select `Markdown` from the **dropdown menu** near the top of the page
 
 ![Second Cell](Images/KEEPTrainingOperationManual/SecondCell.jpg)
 
@@ -40,7 +40,6 @@ Jupyter is a software package that allows developers to both write code and see 
 ![Rename](Images/KEEPTrainingOperationManual/Rename.jpg)
 
 ### <a id="UseExistingNotebook">Using an Existing Notebook</a>
-> Note: You will need to have a Notebook `.ipynb` file
 1. From the Jupyter browser window, navigate to the location of the notebook `.ipynb` file you want to run and click on it
 2. If you would like to re-run the notebook, click the button with the double arrows and click <kbd>Restart and Run All Cells</kbd>
 
